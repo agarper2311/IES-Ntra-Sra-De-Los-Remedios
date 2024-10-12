@@ -1,25 +1,25 @@
 Algoritmo funcionNumParOImpar
-    // Crea un programa que invoque una función que devuelva si el número leído es par o impar
+    // Crea un programa que invoque una funciï¿½n que devuelva si el nï¿½mero leï¿½do es par o impar
     
     Definir num Como Entero
     Definir tipoNumero Como Logico
     
-    Escribir "Introduzca un número: "
+    Escribir "Introduzca un nï¿½mero: "
     Leer num
     
-    // Llamada a la función que verifica si el número es par o impar
+    // Llamada a la funciï¿½n que verifica si el nï¿½mero es par o impar
     tipoNumero <- esPar(num)
     
     Si tipoNumero = Verdadero Entonces
-        Escribir "El número ", num, " es par."
+        Escribir "El nï¿½mero ", num, " es par."
     SiNo
-        Escribir "El número ", num, " es impar."
+        Escribir "El nï¿½mero ", num, " es impar."
     FinSi
     
 FinAlgoritmo
 
 Funcion tipoNumero <- esPar (n)
-    // Función que determina si un número entero es par
+    // Funciï¿½n que determina si un nï¿½mero entero es par
     Si n MOD 2 = 0 Entonces
 		tipoNumero = Verdadero
     SiNo
