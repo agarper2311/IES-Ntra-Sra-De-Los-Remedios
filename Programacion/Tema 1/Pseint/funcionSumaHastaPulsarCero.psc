@@ -4,7 +4,7 @@ Algoritmo sumaHastaPulsarCero
 	Definir acumulado Como Entero
 	Definir resultado Como Entero
 	
-	Escribir "Introduzca un número, introduzca 0 para terminar: "
+	Escribir "Introduzca un nï¿½mero, introduzca 0 para terminar: "
 	Leer numero
 	
 	resultado <- suma(numero)
@@ -17,7 +17,7 @@ Funcion resultado <- suma(numero)
 	Mientras numero <> 0
 		
 		acumulado = acumulado + numero
-		Escribir "Introduzca otro número (0 para terminar): "
+		Escribir "Introduzca otro nï¿½mero (0 para terminar): "
 		Leer numero
 		
 	FinMientras
