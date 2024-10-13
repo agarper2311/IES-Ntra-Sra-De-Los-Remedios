@@ -2,7 +2,9 @@
 ## I.E.S Ntra. Sra de los Remedios, Ubrique
 
 > [!IMPORTANT]
-> I.E.S Ntra. Sra de los Remedios
+> Para la sección de Libros Programación
+> es recomendable descargar el repositorio
+> ya que no se ve el PDF al completo
 
 >[!NOTE]
->Gracias por leer 
+>Gracias por leer  <3
