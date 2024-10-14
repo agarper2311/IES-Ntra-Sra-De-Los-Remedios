@@ -8,3 +8,7 @@
 
 >[!NOTE]
 >Gracias por leer  <3
+
+>[!WARNING]
+> ## Licencia
+> Este proyecto está licenciado bajo la [Licencia Creative Commons Attribution 4.0 International](http://creativecommons.org/licenses/by/4.0/).
