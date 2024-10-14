@@ -11,7 +11,8 @@
 > Gracias por leer  <3.
 
 > [!WARNING]
+> Leer más abajo
 
-> ## Licencia
+ ## Licencia
 
-> Este proyecto está licenciado bajo la  [![Licencia Creative Commons Attribution 4.0 International](https://licensebuttons.net/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/).
+ Este proyecto está licenciado bajo la  [![Licencia Creative Commons Attribution 4.0 International](https://licensebuttons.net/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/).
