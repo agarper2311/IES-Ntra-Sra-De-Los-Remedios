@@ -34,3 +34,17 @@
 - Explica si tu código está o no cohesionado y por qué. Señala alguna parte a modo de ejemplo.
 
 ### Participantes: Jaime Ramírez, David Sanchez, Ángel García
+
+### Reparto para la exposición:
+
+Del punto 1 al 6 -> David Sánchez
+Del punto 7 al 12 -> Jaime Ramirez
+Del punto 12 al 19 -> Ángel García
+
+Explicar el diagrama de Flujo:
+
+David Sánchez y Jaime Ramirez
+
+### Diagrama de Flujo:
+Realizado por Ángel
+
