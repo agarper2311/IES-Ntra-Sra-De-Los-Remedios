@@ -5,7 +5,7 @@ Algoritmo seleccionarAlumnoAleatoriamente
 	
 	ALUMNO = 19
 	
-	Escribir "Introduzca un número entre para elegir un alumno aleatoriamente: "
+	Escribir "Introduzca un número para elegir un alumno aleatoriamente: "
 	Leer num
 	
 	
