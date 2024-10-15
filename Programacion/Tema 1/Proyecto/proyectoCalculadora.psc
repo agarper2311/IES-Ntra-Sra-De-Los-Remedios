@@ -1,28 +1,41 @@
 Algoritmo proyectoCalculadora
+	Definir num Como Entero
 	Definir num1 Como Entero
     Definir num2 Como Entero
     Definir resultado Como Entero
     Definir option Como Entero
 	
+	
+	Escribir "Calculadora Avanzada"
+	Escribir ""
     Escribir "Menú de selección: "
-    Escribir "1. Suma"
-    Escribir "2. Resta"
-    Escribir "3. Multiplicar"
-    Escribir "4. Dividir"
-    Escribir "5. Raiz Cuadrada"
-	Escribir "6. MCD"
+    Escribir "*__________________________________________*"
+	Escribir "|          Operaciones Básicas             |"
+	Escribir "*------------------------------------------*"
+	Escribir "| 1.Suma	 2.Resta  3.Multiplicar 4.Dividir |"
+	Escribir "*------------------------------------------*"
+	Escribir "|         Operaciones Intermedias          |"
+	Escribir "*------------------------------------------*"
+	Escribir "|   5. Raiz Cuadrada	 6. MCD  7.MCM        |"
+	Escribir "*------------------------------------------*"
+	Escribir "|         Operaciones Avanzadas            |"
+	Escribir "*------------------------------------------*"
+	Escribir "|	 7. Log. Natural      8.Calc. Área Trgl   |"
+	Escribir "|	 8. Calc. Área Circ.  9.Calc. Área Rctgl  |"
+	Escribir "*------------------------------------------*"
+	
     Leer option
 	
     Segun option Hacer
         1:
-            resultadoSuma <- realizarSuma(num1, num2)  // Llamada a la función suma
+            resultadoSuma <- realizarSuma(num)  // Llamada a la función suma
             Escribir "El resultado es: ", resultadoSuma
         2: 
-            resultadoResta <- realizarResta(num1, num2)
+            resultadoResta <- realizarResta(num)
 			Escribir "El resultado es: ", resultadoResta
 			
 		3:
-			resultadoMultiplicar <- realizarMultiplicar(num1, num2)
+			resultadoMultiplicar <- realizarMultiplicar(num)
 			Escribir "El resultado es: ", resultadoMultiplicar
 			
 		4: 
@@ -30,7 +43,7 @@ Algoritmo proyectoCalculadora
 			Escribir "El resultado es: ", resultadoDividir
 			
 		5: 
-			resultadoRaizCuadrada <- realizarRaizCuadrada(num1)
+			resultadoRaizCuadrada <- realizarRaizCuadrada(num)
 			Escribir "El resultado es: ", resultadoRaizCuadrada
 			
 		6: 
@@ -38,43 +51,43 @@ Algoritmo proyectoCalculadora
 			Escribir "El resultado es: ", mcd
 			
 			
+		7: mcm <- calcularMCM(num1, num2)
     FinSegun
 	
 FinAlgoritmo
 
-// Intento de función para almacenar la frase para introducir los números y llamarla
-// en otras funciones
-
-// Funcion introducirNumeros <- leerNumeros(num1, num2)
-// 	Escribir "Introduzca el primer número y después el segundo: "
-//     Leer num1
-//     Leer num2
-
-// 	introducirNumeros <- num1 + num2
-// FinFuncion
-
-Funcion resultadoSuma <- realizarSuma(num1, num2)  
-	Escribir "Introduzca el primer número y después el segundo: "
-    Leer num1
-    Leer num2
-    resultadoSuma <- num1 + num2 
+Funcion resultadoSuma <- realizarSuma(num)  
+	Repetir
+		Escribir "Introduzca un número introduzca 0 para ver el resultado: "
+		Leer num
+		
+		resultadoSuma = resultadoSuma + num
+	Hasta Que num = 0
+	
+    
 FinFuncion
 
 
-Funcion resultadoResta <- realizarResta(num1, num2)
-	Escribir "Introduzca el primer número y después el segundo: "
-    Leer num1
-    Leer num2
+Funcion resultadoResta <- realizarResta(num)
+	Repetir
+		Escribir "Introduzca un número introduzca 0 para ver el resultado: "
+		Leer num
+		
+		resultadoResta = resultadoResta - num
+	Hasta Que num = 0
 	
-	resultadoResta <- num1 - num2
 FinFuncion
 
-Funcion resultadoMultiplicar <- realizarMultiplicar(num1, num2)
-	Escribir "Introduzca el primer número y después el segundo: "
-    Leer num1
-    Leer num2
+// Corregir ésta función ya que da igual el número que le introduzcas, num va a almacenar el valor introducido pero el acumulador resultadoMultiplicar siempre va a valer 0
+
+Funcion resultadoMultiplicar <- realizarMultiplicar(num)
+	Repetir
+		Escribir "Introduzca un número introduzca 0 para ver el resultado: "
+		Leer num
+		
+		resultadoMultiplicar = resultadoMultiplicar * num
+	Hasta Que num = 0
 	
-	resultadoMultiplicar <- num1 * num2
 FinFuncion
 
 Funcion resultadoDividir <- realizarDivision(num1, num2)
@@ -107,4 +120,9 @@ Funcion mcd <- calcularMCD(num1, num2)
     FinMientras
     mcd <- num1
     Escribir  mcd
-FinAlgoritmo
+FinFuncion
+
+Funcion mcm <- calcularMCM(num1, num2)
+	
+FinFuncion
+	
