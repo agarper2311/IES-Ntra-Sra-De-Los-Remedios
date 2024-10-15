@@ -5,18 +5,30 @@ Algoritmo seleccionarAlumnoAleatoriamente
 	
 	ALUMNO = 19
 	
-	Escribir "Introduzca un número para elegir un alumno aleatoriamente: "
+	Escribir "Introduzca un número entre para elegir un alumno aleatoriamente: "
 	Leer num
 	
-	Escribir "Listado de alumnos"
-	Para i = num Hasta 19 Hacer
-		Escribir "Alumno ", i
-	FinPara
 	
-	Escribir "Seleccionando un alumno al azar..."
-	alumnoAleatorio <- alumnoAzar(num, ALUMNO)
 	
-	Escribir "El alumno seleccionado es el número: ", alumnoAleatorio
+	
+	
+	si num > ALUMNO Entonces
+		Escribir "No hay más de ", ALUMNO, " alumnos en clase"
+		
+	SiNo
+		Escribir "Listado de alumnos"
+		Para i = num Hasta 19 Hacer
+			Escribir "Alumno ", i
+		FinPara
+		Escribir "Seleccionando un alumno al azar..."
+		alumnoAleatorio <- alumnoAzar(num, ALUMNO)
+		
+		Escribir "El alumno seleccionado es el número: ", alumnoAleatorio
+	FinSi
+	
+	
+	
+	
 	
 FinAlgoritmo
 
