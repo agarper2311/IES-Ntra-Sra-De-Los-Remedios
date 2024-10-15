@@ -32,3 +32,5 @@
 19. Aspecto de la programación modular
 
 - Explica si tu código está o no cohesionado y por qué. Señala alguna parte a modo de ejemplo.
+
+### Participantes: Jaime Ramírez, David Sanchez, Ángel García
