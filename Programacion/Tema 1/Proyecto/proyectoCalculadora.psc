@@ -5,6 +5,8 @@ Algoritmo proyectoCalculadora
     Definir resultado Como Entero
     Definir option Como Entero
 	
+	//Estructura Interacctiva
+	// Generacion de un While
 	Repetir
 		
 		Escribir "Calculadora Avanzada"
@@ -21,12 +23,13 @@ Algoritmo proyectoCalculadora
 		Escribir "*------------------------------------------*"
 		Escribir "|         Operaciones Avanzadas            |"
 		Escribir "*------------------------------------------*"
-		Escribir "|	 7. Log. Natural      9.Calc. Área Trgl   |"
-		Escribir "|	 8. Calc. Área Circ.  10.Calc. Área Rctgl |"
+		Escribir "| 7. Log. Natural      9.Calc. Área Trgl   |"
+		Escribir "| 8. Calc. Área Circ.  10.Calc. Área Rctgl |"
 		Escribir "*------------------------------------------*"
 		
 		Leer option
 		
+		//Estructura Selectiva
 		Segun option Hacer
 			1:
 				resultadoSuma <- realizarSuma(num)  // Llamada a la función suma
@@ -69,31 +72,33 @@ Algoritmo proyectoCalculadora
 FinAlgoritmo
 
 Funcion resultadoSuma <- realizarSuma(num)  
+	//Estructura Interacctiva
+	// Generacion de un While
 	Repetir
 		Escribir "Introduzca un número introduzca 0 para ver el resultado: "
 		Leer num
-		
-		resultadoSuma = resultadoSuma + num
-		Escribir "El resultado es ", resultadoSuma
+		suma = suma + num
 	Hasta Que num = 0
-	
-    
+	Escribir "El resultado es ", suma
 FinFuncion
 
 
 Funcion resultadoResta <- realizarResta(num)
+	//Estructura Interacctiva
+	// Generacion de un While
 	Repetir
 		Escribir "Introduzca un número introduzca 0 para ver el resultado: "
 		Leer num
-		
-		Escribir "El resultado es ", resultadoResta
+		resta = resta - num
 	Hasta Que num = 0
-	
+	Escribir "El resultado es ", resta
 FinFuncion
 
 // Corregir ésta función ya que da igual el número que le introduzcas, num va a almacenar el valor introducido pero el acumulador resultadoMultiplicar siempre va a valer 0
 
 Funcion resultadoMultiplicar <- realizarMultiplicar(num)
+	//Estructura Interacctiva
+	// Generacion de un While
 	Repetir
 		Escribir "Introduzca un número introduzca 0 para ver el resultado: "
 		Leer num
@@ -126,7 +131,8 @@ Funcion mcd <- calcularMCD(num1, num2)
 	Escribir "Introduzca el primer número y después el segundo: "
     Leer num1
     Leer num2
-	
+	//Estructura Interactiva
+	//Genera do While
     Mientras num2 <> 0 Hacer
         Si num1 > num2 Entonces
             num1 <- num1 - num2
@@ -135,7 +141,6 @@ Funcion mcd <- calcularMCD(num1, num2)
         FinSi
     FinMientras
     mcd <- num1
-    Escribir  
 	Escribir "El resultado es ", mcd
 FinFuncion
 
@@ -147,7 +152,6 @@ FinFuncion
 
 Funcion resultadoCirculo <- calcularAreaCirculo(radio)
 	Escribir "Radio del circulo"
-	//Creamos la variable radio.
 	Leer radio
 	//Operacion para calcular el area.
 	area = PI * radio^2
@@ -159,7 +163,7 @@ Funcion resultadoTriangulo <- calcularAreaTriangulo(base,altura)
 	Leer base
 	Escribir "Introduce la altura del triangulo: "
 	Leer altura
-//Operacion para calcular area Triangulo
+	//Operacion para calcular area Triangulo
 	area = (base * altura) / 2
 	Escribir "El area del triangulo es: ", area
 FinFuncion
