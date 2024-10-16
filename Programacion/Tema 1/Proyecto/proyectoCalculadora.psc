@@ -84,22 +84,22 @@ Funcion resultadoSuma <- realizarSuma(num)
 	Repetir
 		Escribir "Introduzca un número introduzca 0 para ver el resultado: "
 		Leer num
-<<<<<<< HEAD
+
 		
 		resultadoSuma = resultadoSuma + num
 	Hasta Que num = 0
 	Escribir "El resultado es ", resultadoSuma
     
-=======
+
 		suma = suma + num
 	Hasta Que num = 0
 	Escribir "El resultado es ", suma
->>>>>>> 835016e16c3f6a8d75cc4afce8eb8f785d604743
+
 FinFuncion
 
 //Modificado por David
 Funcion resultadoResta <- realizarResta(num)
-<<<<<<< HEAD
+
 	Escribir "Introduzca un número introduzca 0 para ver el resultado: "
 	Leer num
 	resultadoResta = num
@@ -110,7 +110,7 @@ Funcion resultadoResta <- realizarResta(num)
 		resultadoResta = resultadoResta - (num)
 	Hasta Que num = 0
 	Escribir "El resultado es ", resultadoResta
-=======
+
 	//Estructura Interacctiva
 	// Generacion de un While
 	Repetir
@@ -119,18 +119,18 @@ Funcion resultadoResta <- realizarResta(num)
 		resta = resta - num
 	Hasta Que num = 0
 	Escribir "El resultado es ", resta
->>>>>>> 835016e16c3f6a8d75cc4afce8eb8f785d604743
+
 FinFuncion
 
 Funcion resultadoMultiplicar <- realizarMultiplicar(num)
-<<<<<<< HEAD
+
 	Escribir "Introduzca un número introduzca 0 para ver el resultado: "
 	Leer num
 	resultadoMultiplicar = num
-=======
+
 	//Estructura Interacctiva
 	// Generacion de un While
->>>>>>> 835016e16c3f6a8d75cc4afce8eb8f785d604743
+
 	Repetir
 		Escribir "Introduzca un número introduzca 0 para ver el resultado: "
 		Leer num
@@ -173,10 +173,8 @@ Funcion mcd <- calcularMCD(num1, num2)
         FinSi
     FinMientras
     mcd <- num1
-<<<<<<< HEAD
-    
-=======
->>>>>>> 835016e16c3f6a8d75cc4afce8eb8f785d604743
+
+
 	Escribir "El resultado es ", mcd
 FinFuncion
 
@@ -186,6 +184,7 @@ Funcion mcm <- calcularMCM(num1, num2)
     Leer num2
 FinFuncion
 
+
 //Hecho por David
 Funcion resultadoCirculo <- calcularAreaCirculo(radio)
 	Escribir "Radio del circulo"
@@ -194,6 +193,7 @@ Funcion resultadoCirculo <- calcularAreaCirculo(radio)
 	area = PI * radio^2
 	Escribir "El area del circulo es: ", area
 FinFuncion
+
 //Hecho por David
 Funcion resultadoTriangulo <- calcularAreaTriangulo(base,altura)
 	Escribir "Introduce la base del triangulo: "
@@ -204,6 +204,7 @@ Funcion resultadoTriangulo <- calcularAreaTriangulo(base,altura)
 	area = (base * altura) / 2
 	Escribir "El area del triangulo es: ", area
 FinFuncion
+
 //Hecho por David
 Funcion resultadoRctgl <- calcularAreaRctgl(base,altura)
 	Escribir "Introduce la base del Rectangulo: "
