@@ -214,3 +214,69 @@ Funcion resultadoRctgl <- calcularAreaRctgl(base,altura)
 	area = base*altura
 	Escribir "El area del rectangulo es: ", area 
 FinFuncion
+
+
+// Realizado por Jaime Ramírez
+
+Funcion logn <- resultadoLogn ( num1 )
+	Repetir
+		Escribir "Introduzca un numero"
+		Leer num1
+		
+		logn <- ln(num1)
+		Escribir "El resultado es " logn
+	Hasta Que option <- 0
+Fin Funcion
+
+Funcion tangente <- resultadoTangente ( num1 )
+	Repetir
+		Escribir "Introduzca un numero"
+		Leer num1
+		tangente <- tan(num1)
+		Escribir "El resultado es " tangente
+	Hasta Que option <- 0
+	
+	
+Fin Funcion
+
+Funcion coseno <- resultadoCoseno ( num1 )
+	Repetir
+		Escribir "Introduzca un numero"
+		Leer num1
+		coseno <- cos(num1)
+		Escribir "El resultado es " coseno
+	Hasta Que option <- 0
+	
+Fin Funcion
+
+Funcion mcm <- calcularMCM(num1, num2)
+	Repetir
+		Escribir "Introduzca el primer número y después el segundo: "
+		Leer num1
+		Leer num2
+		mcd <- calcularMCD(num1, num2)
+		mcm <- (num1 * num2) / mcd
+		Escribir "El resultado es ", mcm
+    Hasta Que option <- 0
+FinFuncion
+
+Funcion potencia <- resultadoPotencia (num1, num2 )
+	Repetir
+		Escribir "Introduzca dos números"
+		Leer num1, num2
+		potencia <- num1 ^ num2
+		Escribir "El resultado es ", potencia
+	Hasta Que option <- 0
+	potencia <- num1 ^ num2
+	Escribir "El resultado es ", potencia
+Fin Funcion
+
+Funcion seno <- resultadoSeno ( num1 )
+	Repetir
+		Escribir "Introduzca un numero"
+		Leer num1
+		seno <- sen(num1)
+		Escribir "El seno es " seno
+	Hasta Que option <- 0
+	
+Fin Funcion
