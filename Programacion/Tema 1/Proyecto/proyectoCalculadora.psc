@@ -24,6 +24,9 @@ Algoritmo proyectoCalculadora
 		Escribir "|	 7. Log. Natural      9.Calc. Área Trgl   |"
 		Escribir "|	 8. Calc. Área Circ.  10.Calc. Área Rctgl |"
 		Escribir "*------------------------------------------*"
+		Escribir "| Pon el número de la operación a realizar.|"
+		Escribir "| O introduzca 0 para salilir              |"
+		Escribir "*------------------------------------------*"
 		
 		Leer option
 		
@@ -74,26 +77,29 @@ Funcion resultadoSuma <- realizarSuma(num)
 		Leer num
 		
 		resultadoSuma = resultadoSuma + num
-		Escribir "El resultado es ", resultadoSuma
 	Hasta Que num = 0
-	
+	Escribir "El resultado es ", resultadoSuma
     
 FinFuncion
 
 
 Funcion resultadoResta <- realizarResta(num)
+	Escribir "Introduzca un número introduzca 0 para ver el resultado: "
+	Leer num
+	resultadoResta = num
 	Repetir
 		Escribir "Introduzca un número introduzca 0 para ver el resultado: "
 		Leer num
 		
-		Escribir "El resultado es ", resultadoResta
+		resultadoResta = resultadoResta - (num)
 	Hasta Que num = 0
-	
+	Escribir "El resultado es ", resultadoResta
 FinFuncion
 
-// Corregir ésta función ya que da igual el número que le introduzcas, num va a almacenar el valor introducido pero el acumulador resultadoMultiplicar siempre va a valer 0
-
 Funcion resultadoMultiplicar <- realizarMultiplicar(num)
+	Escribir "Introduzca un número introduzca 0 para ver el resultado: "
+	Leer num
+	resultadoMultiplicar = num
 	Repetir
 		Escribir "Introduzca un número introduzca 0 para ver el resultado: "
 		Leer num
@@ -135,7 +141,7 @@ Funcion mcd <- calcularMCD(num1, num2)
         FinSi
     FinMientras
     mcd <- num1
-    Escribir  
+    
 	Escribir "El resultado es ", mcd
 FinFuncion
 
