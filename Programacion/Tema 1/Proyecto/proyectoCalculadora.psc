@@ -50,7 +50,8 @@ Algoritmo proyectoCalculadora
 				mcd <- calcularMCD(num1, num2)
 				
 				
-			7: mcm <- calcularMCM(num1, num2)
+			7: 
+				mcm <- calcularMCM(num1, num2)
 				
 				
 				
