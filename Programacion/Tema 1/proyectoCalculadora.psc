@@ -28,9 +28,6 @@ Algoritmo proyectoCalculadora
 		Escribir "| 7. Log. Natural      9.Calc. Área Trgl   |"
 		Escribir "| 8. Calc. Área Circ.  10.Calc. Área Rctgl |"
 		Escribir "*------------------------------------------*"
-		Escribir "| Pon el número de la operación a realizar.|"
-		Escribir "| O introduzca 0 para salilir              |"
-		Escribir "*------------------------------------------*"
 		
 		Leer option
 		
@@ -72,6 +69,8 @@ Algoritmo proyectoCalculadora
 				resultadoRctgl <- calcularAreaRctgl(base,altura)
 				
 				
+			11:
+				resultadoTabla
 		FinSegun
 	Hasta Que option = 0
 	Escribir " Has salido del menu "
@@ -84,33 +83,13 @@ Funcion resultadoSuma <- realizarSuma(num)
 	Repetir
 		Escribir "Introduzca un número introduzca 0 para ver el resultado: "
 		Leer num
-<<<<<<< HEAD
-		
-		resultadoSuma = resultadoSuma + num
-	Hasta Que num = 0
-	Escribir "El resultado es ", resultadoSuma
-    
-=======
 		suma = suma + num
 	Hasta Que num = 0
 	Escribir "El resultado es ", suma
->>>>>>> 835016e16c3f6a8d75cc4afce8eb8f785d604743
 FinFuncion
 
 //Modificado por David
 Funcion resultadoResta <- realizarResta(num)
-<<<<<<< HEAD
-	Escribir "Introduzca un número introduzca 0 para ver el resultado: "
-	Leer num
-	resultadoResta = num
-	Repetir
-		Escribir "Introduzca un número introduzca 0 para ver el resultado: "
-		Leer num
-		
-		resultadoResta = resultadoResta - (num)
-	Hasta Que num = 0
-	Escribir "El resultado es ", resultadoResta
-=======
 	//Estructura Interacctiva
 	// Generacion de un While
 	Repetir
@@ -119,18 +98,13 @@ Funcion resultadoResta <- realizarResta(num)
 		resta = resta - num
 	Hasta Que num = 0
 	Escribir "El resultado es ", resta
->>>>>>> 835016e16c3f6a8d75cc4afce8eb8f785d604743
 FinFuncion
 
+// Corregir ésta función ya que da igual el número que le introduzcas, num va a almacenar el valor introducido pero el acumulador resultadoMultiplicar siempre va a valer 0
+
 Funcion resultadoMultiplicar <- realizarMultiplicar(num)
-<<<<<<< HEAD
-	Escribir "Introduzca un número introduzca 0 para ver el resultado: "
-	Leer num
-	resultadoMultiplicar = num
-=======
 	//Estructura Interacctiva
 	// Generacion de un While
->>>>>>> 835016e16c3f6a8d75cc4afce8eb8f785d604743
 	Repetir
 		Escribir "Introduzca un número introduzca 0 para ver el resultado: "
 		Leer num
@@ -173,10 +147,6 @@ Funcion mcd <- calcularMCD(num1, num2)
         FinSi
     FinMientras
     mcd <- num1
-<<<<<<< HEAD
-    
-=======
->>>>>>> 835016e16c3f6a8d75cc4afce8eb8f785d604743
 	Escribir "El resultado es ", mcd
 FinFuncion
 
