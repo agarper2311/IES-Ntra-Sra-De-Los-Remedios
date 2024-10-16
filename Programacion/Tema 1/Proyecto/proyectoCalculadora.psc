@@ -7,6 +7,8 @@ Algoritmo proyectoCalculadora
 	
 	//Estructura Interacctiva
 	// Generacion de un While
+	//Hecho por Angel
+	//Modificado por David
 	Repetir
 		
 		Escribir "Calculadora Avanzada"
@@ -71,6 +73,7 @@ Algoritmo proyectoCalculadora
 	Escribir " Has salido del menu "
 FinAlgoritmo
 
+//Modificado por David
 Funcion resultadoSuma <- realizarSuma(num)  
 	//Estructura Interacctiva
 	// Generacion de un While
@@ -82,7 +85,7 @@ Funcion resultadoSuma <- realizarSuma(num)
 	Escribir "El resultado es ", suma
 FinFuncion
 
-
+//Modificado por David
 Funcion resultadoResta <- realizarResta(num)
 	//Estructura Interacctiva
 	// Generacion de un While
@@ -150,6 +153,7 @@ Funcion mcm <- calcularMCM(num1, num2)
     Leer num2
 FinFuncion
 
+//Hecho por David
 Funcion resultadoCirculo <- calcularAreaCirculo(radio)
 	Escribir "Radio del circulo"
 	Leer radio
@@ -157,7 +161,7 @@ Funcion resultadoCirculo <- calcularAreaCirculo(radio)
 	area = PI * radio^2
 	Escribir "El area del circulo es: ", area
 FinFuncion
-
+//Hecho por David
 Funcion resultadoTriangulo <- calcularAreaTriangulo(base,altura)
 	Escribir "Introduce la base del triangulo: "
 	Leer base
@@ -167,7 +171,7 @@ Funcion resultadoTriangulo <- calcularAreaTriangulo(base,altura)
 	area = (base * altura) / 2
 	Escribir "El area del triangulo es: ", area
 FinFuncion
-
+//Hecho por David
 Funcion resultadoRctgl <- calcularAreaRctgl(base,altura)
 	Escribir "Introduce la base del Rectangulo: "
 	Leer base
