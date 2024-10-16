@@ -5,6 +5,9 @@ Algoritmo proyectoCalculadora
     Definir resultado Como Entero
     Definir option Como Entero
 	
+	// Variables para la sucesión de Fibonacci
+	Definir a, b, c, i Como Entero
+	
 	//Estructura Interacctiva
 	// Generacion de un While
 	//Hecho por Angel
@@ -25,8 +28,8 @@ Algoritmo proyectoCalculadora
 		Escribir "*------------------------------------------*"
 		Escribir "|         Operaciones Avanzadas            |"
 		Escribir "*------------------------------------------*"
-		Escribir "| 7. Log. Natural      9.Calc. Área Trgl   |"
-		Escribir "| 8. Calc. Área Circ.  10.Calc. Área Rctgl |"
+		Escribir "| 8. Calc. Área Circ.  9.Calc. Área Trgl   |"
+		Escribir "| 10.Calc. Área Rctgl 11.Suc. de Fibonnaci |"
 		Escribir "*------------------------------------------*"
 		Escribir "| Pon el número de la operación a realizar.|"
 		Escribir "| O introduzca 0 para salilir              |"
@@ -54,7 +57,7 @@ Algoritmo proyectoCalculadora
 				
 				
 			7: 
-				mcm <- calcularMCM(num1, num2)
+				mcm <- calcularMCM(num)
 				
 				
 				
@@ -71,16 +74,16 @@ Algoritmo proyectoCalculadora
 			10: 
 				resultadoRctgl <- calcularAreaRctgl(base,altura)
 				
-				
+			11:
+				resultadoFibonacci <- sucesionFibonnaci(num)
 		FinSegun
 	Hasta Que option = 0
 	Escribir " Has salido del menu "
 FinAlgoritmo
 
-//Modificado por David
+
+//Realizado por Ángel
 Funcion resultadoSuma <- realizarSuma(num)  
-	//Estructura Interacctiva
-	// Generacion de un While
 	Repetir
 		Escribir "Introduzca un número introduzca 0 para ver el resultado: "
 		Leer num
@@ -89,15 +92,10 @@ Funcion resultadoSuma <- realizarSuma(num)
 		resultadoSuma = resultadoSuma + num
 	Hasta Que num = 0
 	Escribir "El resultado es ", resultadoSuma
-    
-
-		suma = suma + num
-	Hasta Que num = 0
-	Escribir "El resultado es ", suma
 
 FinFuncion
 
-//Modificado por David
+//Realizado por Ángel
 Funcion resultadoResta <- realizarResta(num)
 
 	Escribir "Introduzca un número introduzca 0 para ver el resultado: "
@@ -107,18 +105,10 @@ Funcion resultadoResta <- realizarResta(num)
 		Escribir "Introduzca un número introduzca 0 para ver el resultado: "
 		Leer num
 		
-		resultadoResta = resultadoResta - (num)
+		resultadoResta = resultadoResta - num
 	Hasta Que num = 0
 	Escribir "El resultado es ", resultadoResta
 
-	//Estructura Interacctiva
-	// Generacion de un While
-	Repetir
-		Escribir "Introduzca un número introduzca 0 para ver el resultado: "
-		Leer num
-		resta = resta - num
-	Hasta Que num = 0
-	Escribir "El resultado es ", resta
 
 FinFuncion
 
@@ -128,16 +118,18 @@ Funcion resultadoMultiplicar <- realizarMultiplicar(num)
 	Leer num
 	resultadoMultiplicar = num
 
-	//Estructura Interacctiva
-	// Generacion de un While
-
 	Repetir
 		Escribir "Introduzca un número introduzca 0 para ver el resultado: "
 		Leer num
 		
-		resultadoMultiplicar = resultadoMultiplicar * num
-		Escribir "El resultado es ", resultadoMultiplicar
+		// Condición sí para que cuando el usuario introduzca 0 la función no tome ese valor y de 0 como resultado
+		si num <> 0 Entonces
+			resultadoMultiplicar = resultadoMultiplicar * num
+		FinSi
+		
+
 	Hasta Que num = 0
+	Escribir "El resultado es ", resultadoMultiplicar
 	
 FinFuncion
 
@@ -151,6 +143,43 @@ Funcion resultadoDividir <- realizarDivision(num1, num2)
 	Escribir "El resultado es ", resultadoDividir
 FinFuncion
 
+
+Funcion resultadoFibonnaci <- sucesionFibonnaci(num)
+    Escribir "Introduce el número de términos: "
+    Leer num
+    
+    // Verificar que el número de términos sea válido
+    Si num <= 0 Entonces
+        Escribir "Por favor, introduce un número mayor que 0."
+    Sino
+        // Inicializar 'a' con 0 y 'b' con 1 (los dos primeros términos de la serie)
+        a <- 0
+        b <- 1
+        
+        // Mostrar el primer término 'a'
+        Escribir a
+        
+        // Si se quiere mostrar más de un término, mostrar el segundo término 'b'
+        Si num > 1 Entonces
+            Escribir b
+        FinSi
+        
+        // Bucle para calcular los siguientes términos desde el 3 hasta 'num'
+        Para i <- 3 Hasta num Hacer
+            // Calcular el siguiente término 'c' como la suma de 'a' y 'b'
+            c <- a + b
+            
+            // Mostrar el término calculado 'c'
+            Escribir c
+            
+            // Actualizar 'a' y 'b' para el siguiente ciclo
+            a <- b
+            b <- c
+        FinPara
+    FinSi
+Fin Funcion
+
+
 Funcion resultadoRaizCuadrada <- realizarRaizCuadrada(num1)
 	Escribir "Introduzca un número: "
     Leer num1
@@ -160,11 +189,7 @@ Funcion resultadoRaizCuadrada <- realizarRaizCuadrada(num1)
 FinFuncion
 
 Funcion mcd <- calcularMCD(num1, num2)
-	Escribir "Introduzca el primer número y después el segundo: "
-    Leer num1
-    Leer num2
-	//Estructura Interactiva
-	//Genera do While
+    // Calculamos el MCD usando el algoritmo de Euclides
     Mientras num2 <> 0 Hacer
         Si num1 > num2 Entonces
             num1 <- num1 - num2
@@ -172,17 +197,38 @@ Funcion mcd <- calcularMCD(num1, num2)
             num2 <- num2 - num1
         FinSi
     FinMientras
-    mcd <- num1
-
-
-	Escribir "El resultado es ", mcd
+	
+    mcd <- num1  // El MCD es el valor de num1 al final del proceso
 FinFuncion
 
-Funcion mcm <- calcularMCM(num1, num2)
-	Escribir "Introduzca el primer número y después el segundo: "
-    Leer num1
-    Leer num2
+
+
+Funcion mcm <- calcularMCM(num)
+    Escribir "Introduzca el primer número (0 para salir): "
+    Leer num
+    Si num = 0 Entonces
+        Escribir "No se puede calcular el MCM de 0. Saliendo."
+        mcm <- 0
+        // Termina la función sin hacer más cálculos
+    Sino
+        mcm <- num  // Inicializamos el acumulador con el primer número
+		
+        Repetir
+            Escribir "Introduzca otro número (0 para ver el resultado y salir): "
+            Leer num
+            
+            Si num <> 0 Entonces
+                // Calculamos el MCM usando la relación MCM(a, b) = (a * b) / MCD(a, b)
+                mcd <- calcularMCD(mcm, num)  // Llamamos a la función para calcular el MCD
+                mcm <- (mcm * num) / mcd  // Actualizamos el MCM acumulado
+            FinSi
+            
+        Hasta Que num = 0  // El ciclo se repite hasta que se introduzca 0
+        
+        Escribir "El MCM de los números es: ", mcm  // Mostramos el resultado final
+    FinSi
 FinFuncion
+
 
 
 //Hecho por David
@@ -248,17 +294,6 @@ Funcion coseno <- resultadoCoseno ( num1 )
 	Hasta Que option <- 0
 	
 Fin Funcion
-
-Funcion mcm <- calcularMCM(num1, num2)
-	Repetir
-		Escribir "Introduzca el primer número y después el segundo: "
-		Leer num1
-		Leer num2
-		mcd <- calcularMCD(num1, num2)
-		mcm <- (num1 * num2) / mcd
-		Escribir "El resultado es ", mcm
-    Hasta Que option <- 0
-FinFuncion
 
 Funcion potencia <- resultadoPotencia (num1, num2 )
 	Repetir
