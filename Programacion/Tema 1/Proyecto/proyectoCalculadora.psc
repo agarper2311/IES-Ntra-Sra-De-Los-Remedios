@@ -5,6 +5,14 @@ Algoritmo proyectoCalculadora
     Definir resultado Como Entero
     Definir option Como Entero
 	
+	Definir nombre1, nombre2, nombre3 Como Cadena
+	
+	nombre1 = "Ángel"
+	nombre2 = "David"
+	nombre3 = "Jaime"
+	
+	
+	
 	// Variables para la sucesión de Fibonacci
 	Definir a, b, c, i Como Entero
 	
@@ -14,7 +22,7 @@ Algoritmo proyectoCalculadora
 	//Modificado por David
 	Repetir
 		
-		Escribir "Calculadora Avanzada"
+		Escribir "Calculadora Avanzada realizada por: ", nombre1, " , ", nombre2, " y ", nombre3, " de 1ºDAW"
 		Escribir ""
 		Escribir "Menú de selección: "
 		Escribir "*__________________________________________*"
