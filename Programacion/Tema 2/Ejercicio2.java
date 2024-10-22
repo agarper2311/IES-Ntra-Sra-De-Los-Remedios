@@ -1,5 +1,16 @@
 public class Ejercicio2 {
     public static void main (String[] args) {
+	
+	/*Esto 
+	  sería
+	 un comentario
+	 multilínea */
+
+	/**
+	Esto sería un ejemplo de documentación de código
+	**/
+	
+	
         boolean logico;
         char caracter;
         byte enteroByte;
