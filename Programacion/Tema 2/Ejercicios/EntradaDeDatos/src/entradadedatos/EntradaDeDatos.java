@@ -1,5 +1,6 @@
-
 package entradadedatos;
+
+import java.util.Scanner;
 
 /**
  *
@@ -11,7 +12,17 @@ public class EntradaDeDatos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        
+        
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.println("Introduzca un numero:  ");
+        int num = sc.nextInt();
+        
+        System.out.println("Usted ha introducido el numero: "+num );
+                
+        
     }
     
 }
