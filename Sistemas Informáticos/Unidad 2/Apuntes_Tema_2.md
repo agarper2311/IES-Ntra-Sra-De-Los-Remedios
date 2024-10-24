@@ -104,8 +104,22 @@ La opción del servidor SSH (Secure Shell) siempre deberemos marcarla.
 
 Comandos principales que usaremos
 
+Virsh es un intérprete de comandos virtual (vir|sh) virtual shell.
+
+
 - virsh -> Nos permitirá gestionar las máquinas virtuales (con sus respectivos parámetros ya que "virsh" es un 
-  comando)
+  comando y una shell virtual):
+
+1. virsh list -> Nos listará las máquinas virtuales que están encendidas
+2. virsh list --all -> Nos muestra todas las máquinas virtuales independientemente de que estén encendidas o no
+3. virsh destroy <nombre_dominio> -> apagamos la máquina del tirón
+4. virsh shutdown <nombre_dominio> -> apagamos la máquina de manera ordenada
+4. virsh start <nombre_dominio> -> Inicia la máquina
+5. virsh console <nombre_dominio> -> Enchufamos la consola gráfica
+6. virsh undefine <nombre_dominio> --remove-all-storage -> Eliminamos la máquina junto con la imagen de disco 
+7. virsh undefine <nombre_dominio> --remove-all-storage --managed-saved -> Elimina la máquina virtual y borra
+el estado almacenado en la máquina física. (solo lo usaremos para cuando la máquina se esté ejecutando)
+
 
 - virt-install -> comando de libvirt para crear una máquina virtual
 
@@ -115,10 +129,22 @@ Comandos principales que usaremos
 virt-install --name bookworm \ -> asignamos un nombre a nivel de máquina
 --memory 1024 \ -> Asignamos la RAM en mb
 --disk size=4 \ -> Asignamos el almacenamiento en Gb
---graphics none \ -> Aquí le indicamos que no va a tener una controladora gráfica
+--graphics none \ -> Aquí le indicamos que no va a tener hardware gráfico
 --location /srv/SIINF/debian-12.2.0-amd64-netinst.iso \ -> ruta de la imagen de disco
---extra-args "console=ttyS0 theme=dark" \ -> Le asignamos una consola en el ttyS0 con un tema oscuro
+--extra-args "console=ttyS0 theme=dark"  -> Le asignamos una consola en el ttyS0 con un tema oscuro,
+
+solo funciona con sistemas linux.
 
 
 Con ctrl + alt gr + ] salimos de la consola
 Con virsh destroy <nombre_dominio> apagamos la máquina
+Con virsh undefine <nombre_dominio> eliminamos la máquina
+
+## Creación de máquina virtual Live
+
+virt-install --name live \
+--memory 8192 \
+--disk none \
+--transient \ -> Borra la máquina en cuanto apaguemos la máquina
+--cdrom /ruta/a/la/iso \
+--osinfo detect=on
