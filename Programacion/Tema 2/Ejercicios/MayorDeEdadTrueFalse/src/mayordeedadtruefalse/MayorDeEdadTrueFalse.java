@@ -22,6 +22,7 @@ public class MayorDeEdadTrueFalse {
         } else {
             esMayorDeEdad = false;
         }
+        
         if(esMayorDeEdad == true){
             System.out.println("Eres Mayor de edad");
         }else if(esMayorDeEdad == false){
