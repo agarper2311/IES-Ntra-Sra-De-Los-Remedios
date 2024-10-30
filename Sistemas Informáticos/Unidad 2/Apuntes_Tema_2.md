@@ -148,7 +148,7 @@ virt-install --name live \
 --cdrom /ruta/a/la/iso \
 --osinfo detect=on
 
-## Grabación con asciinema y uso de Temux
+## Grabación con asciinema y uso de Tmux
 
 Para grabar con asciinema usaremos: asciinema rec <nombre del fichero>
 Para ver la grabación usaremos: asciinema play <nombre del fichero>
@@ -156,7 +156,7 @@ Para ver la grabación en una velocidad determinada añadimos: -s (número)
 Para ver la grabación en velocidad determinada por segundo se añade -i(número)
 Para grabar en cierta velocidad con asciinema usaremos <asciinema rec -i(número) nombrearchivo.cast>
 
-### Temux
+### Tmux
 tmux Sirve para abrir un divisor de pantalla
 Para dividir el panel en vertical CTRL + B + %
 Para cambiar de panel usar CTRL + B + (flecha)
