@@ -3,7 +3,7 @@
 $ virt-install \ -> Este comando lo usamos para la creación de la máquina virtual.
 
 --name bookworm \ -> En este parámetro le asignamos el nombre a la máquina a nivel de libvirt para identificarla
-de las demás
+de las demás que creemos posteriormente
 
 --memory 1024 \ -> Con este parámetro asignamos la cantidad de memoria RAM en megabytes.
 
@@ -34,6 +34,7 @@ Seleccionaremos Spanish para la configuración del teclado en español.
 ## Apartado Configure the network
 
 Hostname: pondremos bookworm -> Este nombre de nuestra máquina ya es a nivel de sistema operativo
+para poder identificarla dentro de una red.
 Domain name: lo dejamos en blanco
 
 ## Apartado Set up users and passwords
@@ -83,6 +84,9 @@ Seleccionamos Spain.
 El mirror que usaremos será el de: deb.debian.org
 
 El proxy que usaremos será el siguiente: http://10.0.2.2:3142
+
+La IP 10.0.2.2 es la ip de la conexión que tiene nuestra máquina virtual con nuestra máquina física.
+Y usamos el puerto 3142 mediante el cuál se conectará al servidor o mirror.
 
 ## Apartado Configuring popularity-contest
 

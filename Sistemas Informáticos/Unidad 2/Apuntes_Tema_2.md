@@ -131,7 +131,7 @@ virt-install --name bookworm \ -> asignamos un nombre a nivel de máquina
 --disk size=4 \ -> Asignamos el almacenamiento en Gb
 --graphics none \ -> Aquí le indicamos que no va a tener hardware gráfico
 --location /srv/SIINF/debian-12.2.0-amd64-netinst.iso \ -> ruta de la imagen de disco
---extra-args "console=ttyS0 theme=dark languaje=C country=ES locale=es_ES.UTF8"  -> Le asignamos una consola
+--extra-args "console=ttyS0 theme=dark languaje=C country=ES locale=es_ES.UTF-8"  -> Le asignamos una consola
  en el ttyS0 con un tema oscuro, solo funciona con sistemas linux.
 
 
