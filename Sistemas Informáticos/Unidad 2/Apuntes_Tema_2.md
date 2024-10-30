@@ -131,9 +131,8 @@ virt-install --name bookworm \ -> asignamos un nombre a nivel de máquina
 --disk size=4 \ -> Asignamos el almacenamiento en Gb
 --graphics none \ -> Aquí le indicamos que no va a tener hardware gráfico
 --location /srv/SIINF/debian-12.2.0-amd64-netinst.iso \ -> ruta de la imagen de disco
---extra-args "console=ttyS0 theme=dark"  -> Le asignamos una consola en el ttyS0 con un tema oscuro,
-
-solo funciona con sistemas linux.
+--extra-args "console=ttyS0 theme=dark languaje=C country=ES locale=es_ES.UTF8"  -> Le asignamos una consola
+ en el ttyS0 con un tema oscuro, solo funciona con sistemas linux.
 
 
 Con ctrl + alt gr + ] salimos de la consola
@@ -148,3 +147,30 @@ virt-install --name live \
 --transient \ -> Borra la máquina en cuanto apaguemos la máquina
 --cdrom /ruta/a/la/iso \
 --osinfo detect=on
+
+## Grabación con asciinema y uso de Temux
+
+Para grabar con asciinema usaremos: asciinema rec <nombre del fichero>
+Para ver la grabación usaremos: asciinema play <nombre del fichero>
+Para ver la grabación en una velocidad determinada añadimos: -s (número)
+Para ver la grabación en velocidad determinada por segundo se añade -i(número)
+Para grabar en cierta velocidad con asciinema usaremos <asciinema rec -i(número) nombrearchivo.cast>
+
+### Temux
+tmux Sirve para abrir un divisor de pantalla
+Para dividir el panel en vertical CTRL + B + %
+Para cambiar de panel usar CTRL + B + (flecha)
+Para dividir el maner en horizontal CTRL + B + “
+Abre otra ventana para escribir CTRL + B + C
+Para cambiar de ventana a ventana CTRL + B + C (número de ventana)
+Para ver la lista de atajos CTRL + B + ?
+Para guardar una sesión CTRL + B + D
+Para volver a esa sesión tmux attach
+
+## Tamaño de la terminal para grabar
+
+nombre del perfil, ElDeseo
+
+165 columnas x 50
+
+En el apartado de "Desplazamiento" la posición de la barra de desplazamiento la ocultamos
