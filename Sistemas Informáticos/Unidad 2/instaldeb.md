@@ -1,145 +1,118 @@
-# SIINF
+## Ángel García Pérez
 
-## Instalación de debian bookworm con `libvirt`
-
-### Objetivos
-
-Instalar el sistema operativo linux (distribución debian) en una máquina
-virtual KVM creada con las herramientas de `libvirt`, usando una consola
-serie para interactuar con el instalador.
-
-Manejar los comandos básicos de `virsh` para gestionar máquinas
-virtuales.
-
-Aprender a hacer grabaciones con `asciinema`.
-
-Aprender un uso básico de un multiplexor de terminales como `tmux`.
-
-### Enunciado
-
-Haz una grabación asciicast en la que se muestre cómo se llevan a cabo
-las siguientes acciones y se responda a las preguntas propuestas:
-
-Instala debian bookworm en una máquina virtual creada con `virt-install`
-de 1GB de RAM, 4GB de disco duro, sin hardware gráfico y con consola
-serie conectada al puerto `ttyS0`. Llama `bookworm` a la máquina tanto a
-nivel de `libvirt` como a nivel de sistema operativo.
-
-    $ virt-install \
-        --name bookworm \
-        --memory 1024 \
-        --disk size=4 \
-        --graphics none \
-        --location /srv/SIINF/debian-12.2.0-amd64-netinst.iso \
-        --extra-args "console=ttyS0 theme=dark"
+Aquí pondré el proceso de la creación de la máquina virtual
 
 
+Empezamos con el primer comando:
 
-Observa que para hacer la grabación asciicast no vamos a tener hardware
-gráfico, pero vamos a emplear una consola serie que hay que añadir al
-hardware de la máquina virtual creada y cuyo uso hay que habilitar en el
-kernel del instalador mediante el argumento extra correspondiente.
+virt-install -> Este comando lo usamos para la creación de la máquina 
+virtual.
 
-Explica las diferencias que hay en el nombre de máquina tanto a nivel de
-dominio `libvirt` como a nivel de sistema operativo.
+1º Parámetro:
 
-No usaremos cuenta para el usuario administrador `root`. Explica las
-implicaciones que eso conlleva.
+--name bookworm -> Le asignamos el nombre a la máquina a nivel de libvirt 
+para poder diferenciarla de las demás.
 
-Como "Full Name" emplearemos nuestro nombre completo con ambos apellidos
-y como "User Name" emplearemos las tres primeras letras de nuestro
-primer apellido, seguidas de las tres primeras letras de nuestro segundo
-apellido, seguidas de las dos primeras letras de nuestro nombre, si es
-un nombre simple, o la primera letra de cada nombre si es un nombre
-compuesto. En total tendremos 8 caracteres. Explica las diferencias
-entre ambos nombres de usuario.
+2º Parámetro:
 
-Usa tu nombre de usuario como contraseña para evitar que se te olvide.
+--memory 1024 -> Le asignamos un 1gb de RAM en megabytes
 
-Haremos un particionado guiado, usando todo el disco y con todo el
-sistema de ficheros en la misma partición. Analiza qué otras opciones de
-particionado puedes utilizar desde el instalador, y compara unas con
-otras.
+3º Parámetro:
 
-¿Qué consecuencias se te ocurre que puede tener la selección de un uso
-horario concreto en el instalador?
+--disk size=4 -> Aquí le indicamos que tendrá 4 Gb de almacenamiento.
 
-Vamos a configurar un proxy/caché de paquetes. Debes explicar para qué
-se utiliza y qué repercusión tiene su uso en el aula.
+4º Parámetro:
 
-No instalaremos interfaz gráfica, pero sí instalaremos un servidor de
-acceso remoto seguro SSH. ¿En qué contextos es útil este tipo de
-instalaciones? ¿Por qué? También deberías dejar que se instalen las
-utilidades estándar del sistema.
+--graphics none -> Aquí le decimos que no queremos una interfaz gráfica o 
+harware gráfico.
 
-Uno de los últimos pasos que lleva a cabo el instalador está relacionado
-con el gestor de arranque. ¿En qué consiste exactamente ese paso? ¿Qué
-ocurriría si no lo ejecutásemos?
+5º Parámetro:
 
-### Extra
+--location /ruta/a la/iso -> Aquí le pasamos la ruta donde se encuentra 
+nuestra ISO.
+
+6º Parámetro:
+
+--extra-args "console=ttyS0 theme=dark languaje=C country=ES 
+locale=es_ES.UTF-8" -> Le asignamos una consola en el ttyS0 que será donde 
+nos conectemos, también le pasamos por parámetros que queremos un tema 
+oscuro, lenguaje español y codificación UTF-8.
+
+Y pulsamos Enter para iniciar la instalación.
+
+## Configure the network
+
+En hostname pondremos bookworm, este será el nombre de nuestra máquina 
+virtual a nivel de sistema operativo para poder identificarla dentro de 
+una red. El nombre de dominio lo dejamos en blanco.
+
+## Set up users and passwords
+
+Aquí la contraseña de root la dejaremos en blanco ya que queremos que 
+nuestro usuario tenga privilegios de administrador.
+
+Ahora debemos introducir nuestro nombre completo, en mi caso Ángel García 
+Pérez
+
+En esta parte pondremos nuestro "lorzaman" el mio sería garperan
+
+Como contraseña pondré el mismo nombre de usuario para evitar olvidarla
+
+## Configure the clock
+
+Aquí elegiremos Madrid para la zona horaria
 
 
+## Partition Disk
 
-Averigua el número total de paquetes que has acabado instalando, así
-como el espacio total de disco que se está usando. ¿Cómo lo compararías
-con las instalaciones de otros sistemas operativos a las que estés
-habituado? ¿Qué ventajas e incovenientes encuentras en la instalación
-realizada respecto a la de esos otros sistemas operativos?
+Aquí usaremos la primera opción, el modo guiado en el cuál usaremos el 
+disco entero.
 
-### A tener en cuenta
+Seleccionamos la primera opción, todos los ficheros en una sola partición 
+(para novatos).
 
-No redimensiones ni maximices bajo ningún pretexto la ventana en la que
-estás haciendo la grabación, porque si lo haces es probable que sufras
-de solapamiento de caracteres en la consola.
+Finalizamos los cambios en el disco
 
-Recuerda explicar con tus propias palabras lo que estás haciendo en todo
-momento, así como mencionar las páginas que usaste para documentarte
-sobre cualquier aspecto que no aparezca detallado en el enunciado.
+## Configure the package manager
 
-Usa el perfil de `Konsole` _ElDeseo_ para hacer la grabación,
-verificando que las dimensiones de la consola son 165x50 mediante el
-comando `stty size` justo antes de empezar a grabar.
+Aquí le indicamos que no queremos escanear ningún dispositivo para 
+continuar con la instalación ya que descargaremos los paquetes que nos 
+hará falta.
 
-Usa `tmux` para dividir la pantalla en dos paneles:
 
-- Izquierda: para explicar lo que estás haciendo mediante el comando
-  `nano -b0 instaldeb.md`, lo que te permitirá guardar tus explicaciones
-  en un fichero markdown.
-- Derecha: para llevar a cabo la actividad.
+Ahora seleccionamos nuestro país para descargar desde un espejo/servidor
 
-Termina la instalación saliendo de la sesión "mediante tirón" del cable
-serie y apagando el dominio `libvirt` mediante el uso del subcomando
-`virsh` correspondiente.
+Seleccionamos el mirror de deb.debian.org
 
-### Número de horas a dedicar
+Ahora como proxy pondremos lo siguiente: 
 
-Se dedicarán 4 horas a la realización de la actividad.
+http://10.0.2.2:3142 -> 10.0.2.2 es la ip de la conexión que tiene nuestra 
+máquina virtual con nuestra máquina física, y usaremos el puerto 3142 
+mediante el cual se conectará al servidor.
 
-### Ficheros a entregar
+Mediante este proxy los paquetes los descargo directamente desde mi 
+máquina física ya que anteriormente he realizado otras instalaciones.
 
-- `instaldeb.cast`: fichero asciicast con grabación de la actividad (no
-  olvides añadir el parámetro `-i 2`).
+Como le hemos indicado a la máquina que no queremos interaz gráfica no 
+seleccionaremos ningún tipo de escritorio.
 
-### Resultados de aprendizaje trabajados en la actividad
+Solo seleccionaremos en caso de que no estén seleccionadas las siguientes 
+opciones: SSH Server y Utilidades estandar del sistema
 
-- :SIINF.1: Evalúa sistemas informáticos identificando sus componentes y
-  características
-- :SIINF.2: Instala sistemas operativos planificando el proceso e
-  interpretando documentación técnica
-- :SIINF.7: Elabora documentación valorando y utilizando aplicaciones
-  informáticas de propósito general
+## Configuring grub-pc
 
-### Criterios de evaluación utilizados en la calificación
+En ésta parte le indicamos que sí, que queremos instalar el grub de 
+arranque en nuestra unidad principal, ya que sin el no podríamos arrancar 
+la máquina
 
-- :SIINF.1.c: Se ha verificado el proceso de puesta en marcha de un
-  equipo.
-- :SIINF.2.d: Se ha planificado el proceso de la instalación de sistemas
-  operativos.
-- :SIINF.2.e: Se han instalado y actualizado sistemas operativos libres
-  y propietarios.
-- :SIINF.2.g: Se han utilizado tecnologías de virtualización para
-  instalar y probar sistemas operativos.
-- :SIINF.2.i: Se han documentado los procesos realizados.
-- :SIINF.7.f: Se han utilizado métodos de búsqueda de documentación
-  técnica mediante el uso de servicios de Internet
-- :SIINF.7.g: Se han utilizado aplicaciones de propósito general
+Seleccionamos /dev/vda o sda dependiendo en cada caso
+
+Aquí seleccionamos que sí, reiniciaremos nuestra máquina virtual para 
+finalizar la partición
+
+Ahora solo ponemos nuestro nombre de login o nombre corto el "lorzaman" y 
+nuestra contraseña para iniciar sesión
+
+Y ya estaría todo.
+
+Ahora haré un sudo poweroff para hacer un apagado limpio
