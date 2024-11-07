@@ -1,3 +1,5 @@
+# Apuntes Tema 2. -> Ángel García Pérez 1ºDAW
+
 Comando loginctl 
 Sirve para listar las sesiones abiertas en el ordenador
 
@@ -174,3 +176,43 @@ nombre del perfil, ElDeseo
 165 columnas x 50
 
 En el apartado de "Desplazamiento" la posición de la barra de desplazamiento la ocultamos
+
+
+# Gestión del Software
+
+Consiste en instalar y desinstalar programas.
+
+## Tipos de gestores de software
+
+Centralizado -> Todos los software o programas están concentrados, es decir, una tienda de aplicaciones.
+|
+|-> Ventajas -> facilidad para encontrar las aplicaciones.
+| 
+|-> Inconvenientes -> Puede no tener disponibilidad total de los programas, si falla la tienda de aplicaciones no
+podremos instalar los programas
+
+
+Distribuido -> 
+|
+|-> Ventajas -> Si por ejemplo fallase la página de libreoffice eso no me impide descargar el firefox desde su 
+|   página.
+|
+|-> Inconvenientes -> Tenemos que asegurarnos de que es seguro un programa desde varias fuentes.
+
+En resumen, no hay nigún tipo que sea mejor o peor. Ambos tienen sus ventajas e inconvenientes. 
+
+## ¿Por qué en Linux hay distribuciones y en Windows no?
+
+Porque Linux es de código libre con lo cual cada persona es libre de personalizar el sistema operativo a su antojo.
+
+## ¿Qué son las librerías de Software?
+
+DLL -> Son ficheros con extensión .dll .
+
+Son conjuntos de funcionalidades para los programas.
+
+## ¿Qué es un repositorio?
+
+Es un conjunto de paquetes formado por librerías.
+
+El paquete es la unidad mínima de medida de distribución en Linux.
