@@ -211,8 +211,39 @@ DLL -> Son ficheros con extensión .dll .
 
 Son conjuntos de funcionalidades para los programas.
 
+QT, GTK -> Está relacionado con las interfaces gráficas, permiten crear interfaces gráficas.
+
 ## ¿Qué es un repositorio?
 
 Es un conjunto de paquetes formado por librerías.
 
 El paquete es la unidad mínima de medida de distribución en Linux.
+
+Sistema de gestión de software
+mkdebvm.sh 
+
+apt update -> Actualiza la visión de las últimas actualizaciones de los paquetes.
+apt upgrade -> Actualiza las versiones de los paquetes
+apt full-upgrade -> actualiza todo y desinstala algunas dependencias si es necesario.
+
+loginctl Sirve para gestionar las sesiones 
+loginctl (argumento) 
+
+ 
+
+sudo (Ejecutar como administrador)
+ | less (nos permite movernos en la terminal)
+Para ver lo que está instalado se usa --installed
+list 'Filtro' (busca un archivo)
+list  *'filtro'* (Busca los archivos con ese nombre)
+show o info 'nombre del archivo'  (nos muestra información de un paquete)
+purge o remove (eliminar paquete) Purge elimina todo (hasta la configuración) remove elimina todo (menos la configuración)
+install (instalar paquete)
+auto-remove (remover todos los archivos del paquete)
+edit-sources (permite editar)
+upgrade (instala versiones nuevas de archivos que tenemos)
+search (Nos da la posibilidad de realizar búsquedas mediante filtros de  búsquedas)
+search ~n nos muestra todos los paquetes por el nombre del paquete (n=name)
+search ~i nos muestra todos los paquetes que estén instalados (i=install)
+
+Instalar aptitude para gestionar las actualizaciones
