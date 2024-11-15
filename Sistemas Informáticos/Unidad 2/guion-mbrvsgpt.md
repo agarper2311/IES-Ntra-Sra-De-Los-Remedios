@@ -88,3 +88,28 @@ por la consola serie
 
 
 #### Redimensionado de particiones
+
+Ahora debemos hacer un "hueco" en el disco, para ello tenemos que reducir la partición raíz
+de la instalación de cada máquina (debbios1 y debuefi1) a 4 GB cada una.
+
+> [!TIP]
+>Para realizar el redimensionado, debemos editar la siguiente línea del archivo XML de dichas 
+>máquinas con el siguiente comando -> `virsh edit <dominio>`, reemplazamos <dominio> por el 
+>nombre de nuestra máquina virtual.
+
+Una vez dentro del XML localizaremos el elemento `<disk type=’file’ device=’cdrom’>` y dentro
+de ese elemento agregamos la siguiente línea:
+`<source=file='/srv/SIINF/debian-12.2.0-amd64-netinst.iso/>'`
+
+
+> [!TIP]
+> Se hace de la misma manera tanto en BIOS como en UEFI.
+
+Con este paso habilitaremos el modo rescate o Rescue Mode desde el CD/DVD para podfer hacer el
+redimensionado.
+
+> [!NOTE]
+> Para acceder a este modo deberemos de iniciar nuestra máquina escribiendo el siguiente comando
+> `virsh start --console <dominio>`
+
+
