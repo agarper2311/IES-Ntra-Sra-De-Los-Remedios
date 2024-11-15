@@ -50,7 +50,7 @@ inicial al ajustar algunos parámetros según el sistema operativo detectado.
 > [!NOTE]
 > El nombre de la máquina a nivel de sistema operativo será debbios1
 
-> [!TIPS]
+> [!TIP]
 > Tenemos que añadir la opción `console=ttyS0` en el menú correspondiente
 > pulsando `TAB` antes de pulsar `ENTER`, también podemos aprovechar para
 > poner un tema de consola oscuro con `theme=dark`
@@ -80,7 +80,7 @@ por la consola serie
 > El nombre de la máquina a nivel de sistema operativo será debuefi1
 
 
-> [!TIPS]
+> [!TIP]
 > Para tener soporte de la consola serie en el instalador tenemos que añadir 
 > la opción `console=ttyS0` en el menú correspondiente pulsando la tecla `e`
 > y luego continuar con el arranque pulsando `CTRL+X`, aprovacharemos también
