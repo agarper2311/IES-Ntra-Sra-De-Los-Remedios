@@ -47,7 +47,7 @@ el tipo de sistema operativo que se instalará desde la ISO especificada. Esto f
 inicial al ajustar algunos parámetros según el sistema operativo detectado.
 
 
->.[!NOTE]
+> [!NOTE]
 > El nombre de la máquina a nivel de sistema operativo será debbios1
 
 
