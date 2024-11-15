@@ -165,8 +165,7 @@ que el dispositivo a manipular es /dev/sda.
 4. `$((2048+1048576*4*1024/512-1))s` -> Aquí especificamos el nuevo final de la partición con un cálculo
 dinámico mediante una expresión aritmética en shell.
 
-> [NOTE]
-> 
+> [!NOTE]
 > Explicación del cálculo:
 > - `2048` -> Marca inicial o sector de inicio.
 > - `1048576` -> Tamaño en bytes de 1 MiB o mebibyte (1MiB = 1024 X 1024).
