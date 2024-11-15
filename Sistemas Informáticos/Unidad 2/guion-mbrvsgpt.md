@@ -85,3 +85,6 @@ por la consola serie
 > la opción `console=ttyS0` en el menú correspondiente pulsando la tecla `e`
 > y luego continuar con el arranque pulsando `CTRL+X`, aprovacharemos también
 > para poner un tema oscuro a la consola serie con `theme=dark`.
+
+
+#### Redimensionado de particiones
