@@ -48,7 +48,7 @@ inicial al ajustar algunos parámetros según el sistema operativo detectado.
 
 
 > [!NOTE]
-> El nombre de la máquina a nivel de sistema operativo será debbios1
+> El nombre de la máquina a nivel de sistema operativo será `debbios1`.
 
 > [!TIP]
 > Tenemos que añadir la opción `console=ttyS0` en el menú correspondiente
@@ -77,7 +77,7 @@ Lo único que cambia aquí es el parámetro boot.
 por la consola serie
 
 > [!NOTE]
-> El nombre de la máquina a nivel de sistema operativo será debuefi1
+> El nombre de la máquina a nivel de sistema operativo será `debuefi1`
 
 
 > [!TIP]
