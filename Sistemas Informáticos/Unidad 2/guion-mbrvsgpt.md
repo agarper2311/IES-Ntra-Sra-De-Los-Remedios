@@ -102,13 +102,13 @@ de ese elemento agregamos la siguiente línea:
 `<source=file='/srv/SIINF/debian-12.2.0-amd64-netinst.iso/>'`
 
 
-> [!TIP]
+> [!NOTE]
 > Se hace de la misma manera tanto en BIOS como en UEFI.
 
 Con este paso habilitaremos el modo rescate o Rescue Mode desde el CD/DVD para podfer hacer el
 redimensionado.
 
-> [!NOTE]
+> [!TIP]
 > Para acceder a este modo deberemos de iniciar nuestra máquina escribiendo el siguiente comando
 > `virsh start --console <dominio>`
 
