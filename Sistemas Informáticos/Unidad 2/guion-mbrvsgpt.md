@@ -174,3 +174,14 @@ dinámico mediante una expresión aritmética en shell.
 > - `/512` -> Divide el tamaño toal en bytes entre 512 que es el tamaño típico de un sector.
 > - `-1` -> Ajusta el cálculo para terminar en el sector correcto.
 
+5. ~# `parted /dev/sda unit s print` -> Con éste comando ahora veremos los cambios realizados en el disco.
+
+
+#### Instalaciones Adicionales
+
+> [!IMPORTANT]
+> Podemos obtener información detallada de todo lo que ocurre durante el arranque si editamos
+> la entrada del menú de grub correspondiente, eliminamos `quiet` y añadimos `console=ttyS0`.
+> Con esto tendremos un arranque más "elocuente".
+
+
