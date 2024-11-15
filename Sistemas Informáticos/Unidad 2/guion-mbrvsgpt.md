@@ -113,3 +113,64 @@ redimensionado.
 > `virsh start --console <dominio>`
 
 
+##### Máquina BIOS
+
+Escribiremos ´virsh start --console <dominio>´.
+
+En cuanto cargue la máquina virtual deberemos de pulsar la tecla `ESC` repetidamente hasta que
+nos salga un menú. En este menú deberemos de escoger la tercera opción `Advanced Options`
+
+
+Una vez dentro de este menú nos situaremos encima de la opción `Rescue Mode` o `Modo Rescate` y
+pulsaremos la tecla `TAB` para poder decirle a la máquina que tenga soporte para la consola serie 
+y le asignamos un tema oscuro.
+
+> [!TIP]
+> Aquí es donde escribiremos el siguiente parámetro para dar soporte a la consola serie
+> `console=ttyS0 theme=dark`
+
+
+Una vez escrito el parámetro para obtener soporte por la consola serie y asignado el tema oscuro
+es hora de pulsar la tecla `ENTER` y después pulsar la barra espaciadora o esperar 30 segundos.
+
+
+##### Apartado Select a Languaje
+
+En esta pantalla seleccionamos la Primera opción `C`. De momento los pasos a realizar serán iguales
+a los pasos realizados en la instalación normal.
+
+##### Apartado Enter rescue mode
+
+En esta pantalla debemos elegir la "partición" donde se almacena el sistema raíz.
+
+> [!TIP]
+> En este caso debemos seleccionar la primera opción `/dev/sda1`
+
+Después de seleccionar la partición donde se instalará, debemos seleccionar la segunda opción
+´Execute a shell in the instaler enviroment´ o Ejecutar un entorno de shell en el instalador.
+
+Una vez seleccionada dicha opción pulsaremos en continuar.
+
+Ahora hay que ejecutar los siguientes comandos en este orden:
+
+- ~# `parted /dev/sda/unit s print` -> Con éste comando podemos ver las propiedades del disco.
+- ~# `e2fsck -f /dev/sda1` -> Con éste comando montaremos el volumen.
+- ~# `resize2fs /dev/sda1 4g` -> Con éste comando redimensionamos el disco a 4 GB.
+- ~# `parted /dev/sda resizepart 1 $((2048+1048576*4*1024/512-1))s` -> Este comando hace lo siguiente:
+
+1. `parted /dev/sda` -> ejecuta el programa `parted` para manejar las particiones, le especificamos
+que el dispositivo a manipular es /dev/sda.
+2. `resizepart` -> Es un subcomando de `parted` que se utiliza para redimensionar una partición existente.
+3. `1` -> Es el número de la partición que se va a redimensionar (dev/sda1).
+4. `$((2048+1048576*4*1024/512-1))s` -> Aquí especificamos el nuevo final de la partición con un cálculo
+dinámico mediante una expresión aritmética en shell.
+
+> [NOTE]
+> Explicación del cálculo:
+> - `2048` -> Marca inicial o sector de inicio.
+> - `1048576` -> Tamaño en bytes de 1 MiB o mebibyte (1MiB = 1024 X 1024).
+> - `4` -> Multiplica el tamaño de un bloque de 1 MiB por 4, con lo cual son 4 MiB.
+> - `1024` -> Convierte el tamaño a KiB.
+> - `/512` -> Divide el tamaño toal en bytes entre 512 que es el tamaño típico de un sector.
+> - `-1` -> Ajusta el cálculo para terminar en el sector correcto.
+
