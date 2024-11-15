@@ -47,4 +47,26 @@ el tipo de sistema operativo que se instalará desde la ISO especificada. Esto f
 inicial al ajustar algunos parámetros según el sistema operativo detectado.
 
 
+>[.NOTE]
+> El nombre de la máquina a nivel de sistema operativo será debbios1
 
+
+## Máquina UEFI / GPT
+
+
+virt-install \
+ --name uefi \
+ --memory 1024 \
+ --disk size=8 \
+ --graphics none \
+ --cdrom /ruta/a/la/iso \
+ --boot uefi \
+ --osinfo detect=on \
+
+### Descripción de los parámetros
+
+Todos los parámetros hasta cdrom son los mismos que los anteriores inclyendo el parámetro de --osinfo.
+Lo único que cambia aquí es el parámetro boot.
+
+- --boot uefi -> En éste parámetro le decimos que arranque en modo UEFI, la UEFI ya "habla" por defecto
+por la consola serie
