@@ -195,7 +195,7 @@ dinámico mediante una expresión aritmética en shell.
 > - `1048576` -> Tamaño en bytes de 1 MiB o mebibyte (1MiB = 1024 X 1024).
 > - `4` -> Multiplica el tamaño de un bloque de 1 MiB por 4, con lo cual son 4 MiB.
 > - `1024` -> Convierte el tamaño a KiB.
-> - `/512` -> Divide el tamaño toal en bytes entre 512 que es el tamaño típico de un sector.
+> - `/512` -> Divide el tamaño total en bytes entre 512 que es el tamaño típico de un sector.
 > - `-1` -> Ajusta el cálculo para terminar en el sector correcto.
 
 5. ~# `parted /dev/sda unit s print` -> Con éste comando ahora veremos los cambios realizados en el disco.
