@@ -185,3 +185,20 @@ dinámico mediante una expresión aritmética en shell.
 > Con esto tendremos un arranque más "elocuente".
 
 
+##### Instalación Adicional BIOS
+
+Para acceder al menú de selección de dispositivos de arranque, debemos pulsar la tecla `ESC` 
+en cuanto se encienda la máquina.
+
+Después de hacer la segunda instalación, no confguraremos una partición swap o área de intercambio
+en el instalador y lo dejaremos para el primer arranque, añadiendo la entrada correspondiente en 
+el fichero `/etc/fstab`. El nombre de máquina virtual a nivel de Sistema Operativo que usaremos
+para la segunda instalación será de ´debbios2´.
+
+Ahora una vez finalizada la instalación mostraremos por pantalla la tabla de particiones y la 
+compararemos con la que teníamos antes de hacer la segunda instalación:
+
+> [!TIP]
+> Usaremos el comando `sudo parted /dev/sda unit s print`
+
+
