@@ -5,6 +5,7 @@ seguido de sus respectivos parámetros.
 
 ## Máquina BIOS / MBR
 
+```bash
 virt-install \
  --name bios \
  --memery 1024 \
@@ -13,6 +14,7 @@ virt-install \
  --cdrom /ruta/a/la/iso \
  --boot bootmenu.enable=on,bios.useserial=on \
  --osinfo detect=on \
+```
 
 ### Descripción de los parámetros
 
@@ -58,7 +60,7 @@ inicial al ajustar algunos parámetros según el sistema operativo detectado.
 
 ## Máquina UEFI / GPT
 
-
+```bash 
 virt-install \
  --name uefi \
  --memory 1024 \
@@ -67,6 +69,7 @@ virt-install \
  --cdrom /ruta/a/la/iso \
  --boot uefi \
  --osinfo detect=on \
+```
 
 ### Descripción de los parámetros
 
@@ -93,9 +96,12 @@ Ahora debemos hacer un "hueco" en el disco, para ello tenemos que reducir la par
 de la instalación de cada máquina (debbios1 y debuefi1) a 4 GB cada una.
 
 > [!TIP]
->Para realizar el redimensionado, debemos editar la siguiente línea del archivo XML de dichas 
->máquinas con el siguiente comando -> `virsh edit <dominio>`, reemplazamos <dominio> por el 
->nombre de nuestra máquina virtual.
+> Para realizar el redimensionado, debemos editar la siguiente línea del archivo XML de dichas 
+> máquinas con el siguiente comando -> ```bash
+> virsh edit <dominio>
+> ```
+> , reemplazamos <dominio> por el 
+> nombre de nuestra máquina virtual.
 
 Una vez dentro del XML localizaremos el elemento `<disk type=’file’ device=’cdrom’>` y dentro
 de ese elemento agregamos la siguiente línea:
@@ -110,7 +116,9 @@ redimensionado.
 
 > [!TIP]
 > Para acceder a este modo deberemos de iniciar nuestra máquina escribiendo el siguiente comando
-> `virsh start --console <dominio>`
+> ```bash
+> virsh start --console <dominio>
+> ```
 
 
 ##### Máquina BIOS
@@ -153,10 +161,26 @@ Una vez seleccionada dicha opción pulsaremos en continuar.
 
 Ahora hay que ejecutar los siguientes comandos en este orden:
 
-- ~# `parted /dev/sda/unit s print` -> Con éste comando podemos ver las propiedades del disco.
-- ~# `e2fsck -f /dev/sda1` -> Con éste comando montaremos el volumen.
-- ~# `resize2fs /dev/sda1 4g` -> Con éste comando redimensionamos el disco a 4 GB.
-- ~# `parted /dev/sda resizepart 1 $((2048+1048576*4*1024/512-1))s` -> Este comando hace lo siguiente:
+- ~# ```bash
+      parted /dev/sda unit s print
+      ```
+  -> Con este comando podemos ver las propiedades del disco.
+
+- ~# ```bash
+      e2fsck -f /dev/sda1
+      ```
+  -> Con este comando verificamos y reparamos el sistema de archivos antes de redimensionarlo.
+
+- ~# ```bash
+      resize2fs /dev/sda1 4g
+      ```
+  -> Con este comando redimensionamos el sistema de archivos a 4 GB.
+
+- ~# ```bash
+      parted /dev/sda resizepart 1 $((2048+1048576*4*1024/512-1))s
+      ```
+  -> Este comando redimensiona la partición número 1 para extenderla hasta un tamaño calculado dinámicamente.
+
 
 1. `parted /dev/sda` -> ejecuta el programa `parted` para manejar las particiones, le especificamos
 que el dispositivo a manipular es /dev/sda.
@@ -199,6 +223,52 @@ Ahora una vez finalizada la instalación mostraremos por pantalla la tabla de pa
 compararemos con la que teníamos antes de hacer la segunda instalación:
 
 > [!TIP]
-> Usaremos el comando `sudo parted /dev/sda unit s print`
+> Usaremos el comando 
+> ```bash 
+> sudo parted /dev/sda unit s print`
+>```
 
+##### Instalación Adicional UEFI
 
+Para acceder al menú de selección de dispositivos de arranque, debemos pulsar también la tecla
+`ESC` nada más encender la máquina o entrar a la UEFI mediante el menú del GRUB.
+
+Después de hacer la segunda instalación vamos a reutilizar la partición swap o área de intercambio 
+y dejaremos que el instalador la formatee de nuevo.
+
+> [!NOTE]
+> Es la opción por defecto, está marcada con una `F` en el resumen de la tabla de particiones.
+
+Esto implica que habrá que cambiar el UUID de la partición swap en el fichero `/etc/fstab``de 
+la primera instalacion que hicimos ´debuefi1´.
+
+> [!TIP]
+> Podemos saber el nuevo `UUID` de la partición `swap` con el siguiente comando:
+> ```bash
+> sudo blkid
+> ```
+> También podemos visualizar detalladamente el uso de la swap o área de intercambio que está haciendo
+> el sistema operativo mediante el comando:
+> ```bash
+> sudo swapon --output-all
+>```
+
+Con este cambio de `UUID` elarranque no se ralentizará cuando llegue el momento de montar las particiones
+según indica el fichero `/etc/fstab`.
+
+> [!IMPORTANT]
+> También es aconsejable actualizar la variable `RESUME` en el fichero `/etc/initramfs-tools/conf.d/resume`
+> usando el nuevo `UUID` de la partición de intercambio o swap y generar el fichero `initrd` usando el comando:
+> ``` bash
+> sudo dpkg-reconfigure linux-image-6.1.0-17-amd64
+>```
+
+Con estos cambios de UUID el arranque no se verá ralentizado en la etapa inicial relacionada con el 
+initial ramdisk.
+
+Ahora también mostraremos por pantalla la tabla de particiones para compararla con la que teníamos
+antes de hacer la segunda instalación.
+
+```bash
+sudo parted /dev/sda unit s print
+```
