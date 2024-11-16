@@ -272,3 +272,5 @@ antes de hacer la segunda instalación.
 ```bash
 sudo parted /dev/sda unit s print
 ```
+
+#### Recuperación del bootloader (GRUB)
