@@ -239,7 +239,7 @@ y dejaremos que el instalador la formatee de nuevo.
 > [!NOTE]
 > Es la opción por defecto, está marcada con una `F` en el resumen de la tabla de particiones.
 
-Esto implica que habrá que cambiar el UUID de la partición swap en el fichero `/etc/fstab``de 
+Esto implica que habrá que cambiar el UUID de la partición swap en el fichero `/etc/fstab` de 
 la primera instalacion que hicimos ´debuefi1´.
 
 > [!TIP]
