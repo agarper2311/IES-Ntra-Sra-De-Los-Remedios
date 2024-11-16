@@ -97,7 +97,8 @@ de la instalación de cada máquina (debbios1 y debuefi1) a 4 GB cada una.
 
 > [!TIP]
 > Para realizar el redimensionado, debemos editar la siguiente línea del archivo XML de dichas 
-> máquinas con el siguiente comando -> ```bash
+> máquinas con el siguiente comando ->
+> ```bash
 > virsh edit <dominio>
 > ```
 > , reemplazamos <dominio> por el 
