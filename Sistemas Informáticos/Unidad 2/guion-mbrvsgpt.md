@@ -153,7 +153,7 @@ a los pasos realizados en la instalación normal.
 En esta pantalla debemos elegir la "partición" donde se almacena el sistema raíz.
 
 > [!TIP]
-> En este caso debemos seleccionar la primera opción `/dev/sda1`
+> En este caso debemos seleccionar la primera opción `/dev/vda1`
 
 Después de seleccionar la partición donde se instalará, debemos seleccionar la segunda opción
 ´Execute a shell in the instaler enviroment´ o Ejecutar un entorno de shell en el instalador.
@@ -163,30 +163,30 @@ Una vez seleccionada dicha opción pulsaremos en continuar.
 Ahora hay que ejecutar los siguientes comandos en este orden:
 
 - ~# ```bash
-      parted /dev/sda unit s print
+      parted /dev/vda unit s print
       ```
   -> Con este comando podemos ver las propiedades del disco.
 
 - ~# ```bash
-      e2fsck -f /dev/sda1
+      e2fsck -f /dev/vda1
       ```
   -> Con este comando verificamos y reparamos el sistema de archivos antes de redimensionarlo.
 
 - ~# ```bash
-      resize2fs /dev/sda1 4g
+      resize2fs /dev/vda1 4g
       ```
   -> Con este comando redimensionamos el sistema de archivos a 4 GB.
 
 - ~# ```bash
-      parted /dev/sda resizepart 1 $((2048+1048576*4*1024/512-1))s
+      parted /dev/vda resizepart 1 $((2048+1048576*4*1024/512-1))s
       ```
   -> Este comando redimensiona la partición número 1 para extenderla hasta un tamaño calculado dinámicamente.
 
 
 1. `parted /dev/vda` -> ejecuta el programa `parted` para manejar las particiones, le especificamos
-que el dispositivo a manipular es /dev/sda.
+que el dispositivo a manipular es /dev/vda.
 2. `resizepart` -> Es un subcomando de `parted` que se utiliza para redimensionar una partición existente.
-3. `1` -> Es el número de la partición que se va a redimensionar (dev/sda1).
+3. `1` -> Es el número de la partición que se va a redimensionar (dev/vda1).
 4. `$((2048+1048576*4*1024/512-1))s` -> Aquí especificamos el nuevo final de la partición con un cálculo
 dinámico mediante una expresión aritmética en shell.
 
@@ -200,7 +200,7 @@ dinámico mediante una expresión aritmética en shell.
 > - `-1` -> Ajusta el cálculo para terminar en el sector correcto.
 > - `s` -> Se refiere a sectores.
 
-5. ~# `parted /dev/sda unit s print` -> Con éste comando ahora veremos los cambios realizados en el disco.
+5. ~# `parted /dev/vda unit s print` -> Con éste comando ahora veremos los cambios realizados en el disco.
 
 
 #### Instalaciones Adicionales
