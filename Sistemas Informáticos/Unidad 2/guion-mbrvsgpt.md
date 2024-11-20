@@ -290,8 +290,7 @@ etapa del bootloader (GRUB). Ahora vamos a destrozar el MBR usando el comando `d
 446 bytes:
 
 - $ ``` bash
-- sudo dd if/dev/zero of=/dev/sda bs=446 count=1
-- ```
+sudo dd if/dev/zero of=/dev/sda bs=446 count=1 ```
 
 > [!NOTE]
 > Si ahora hacemos
@@ -316,5 +315,3 @@ veremos que todos los bytes están a 0.
 sudo xxd -l 446 /dev/sda
 ```
 
-> [!QUESTIONS]
-> ¿Por qué ocurre esto?
