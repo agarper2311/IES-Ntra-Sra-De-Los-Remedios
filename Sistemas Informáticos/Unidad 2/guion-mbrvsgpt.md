@@ -316,5 +316,5 @@ veremos que todos los bytes están a 0.
 sudo xxd -l 446 /dev/sda
 ```
 
-> [!QUESTION]
+> [!QUESTIONS]
 > ¿Por qué ocurre esto?
