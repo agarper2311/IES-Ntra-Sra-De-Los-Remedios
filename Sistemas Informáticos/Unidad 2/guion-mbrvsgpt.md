@@ -289,9 +289,9 @@ Los bytes que estamos viendo forman parte del MBR (Master Boot Record) y ahí es
 etapa del bootloader (GRUB). Ahora vamos a destrozar el MBR usando el comando `dd`, poniendo a cero los primeros
 446 bytes:
 
-- $ ``` bash 
-sudo dd if/dev/zero of=/dev/sda bs=446 count=1
-```
+- $ ``` bash
+- sudo dd if/dev/zero of=/dev/sda bs=446 count=1
+- ```
 
 > [!NOTE]
 > Si ahora hacemos
