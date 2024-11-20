@@ -275,3 +275,46 @@ sudo parted /dev/sda unit s print
 ```
 
 #### Recuperación del bootloader (GRUB)
+
+##### BIOS (tras el borrado del MBR)
+
+Ahora arrancamos con alguna de nuestras instalaciones que hemos hecho en la máquina BIOS y vamos a comprobar el 
+contenido de los primeros 446 bytes del disco:
+
+``` bash
+sudo xxd -l 446 /dev/sda
+```
+
+Los bytes que estamos viendo forman parte del MBR (Master Boot Record) y ahí es donde hemos instalado la primera 
+etapa del bootloader (GRUB). Ahora vamos a destrozar el MBR usando el comando `dd`, poniendo a cero los primeros
+446 bytes:
+
+- $ ``` bash 
+sudo dd if/dev/zero of=/dev/sda bs=446 count=1
+```
+
+> [!NOTE]
+> Si ahora hacemos
+> ``` bash
+> sudo xxd -l 446 /dev/sda
+> ```
+> podremos ver que todos los bytes ahora están a 0.
+
+
+> [!WARNING]
+> Ahora nos hemos quedado sin poder arrancar ninguna de las 2 instalaciones.
+> Veremos que ocurre y recuperaremos el bootloader usando otra vez el instalador
+> en modo rescate
+
+
+##### UEFI (tras instalar otro SO con bootloader propio)
+
+Si observamos el contenido de los primeros 446 bytes del disco duro de la máquina `UEFI` 
+veremos que todos los bytes están a 0.
+
+``` bash
+sudo xxd -l 446 /dev/sda
+```
+
+> [!QUESTION]
+> ¿Por qué ocurre esto?
