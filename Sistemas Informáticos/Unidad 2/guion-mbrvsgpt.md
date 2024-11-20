@@ -183,7 +183,7 @@ Ahora hay que ejecutar los siguientes comandos en este orden:
   -> Este comando redimensiona la partición número 1 para extenderla hasta un tamaño calculado dinámicamente.
 
 
-1. `parted /dev/sda` -> ejecuta el programa `parted` para manejar las particiones, le especificamos
+1. `parted /dev/vda` -> ejecuta el programa `parted` para manejar las particiones, le especificamos
 que el dispositivo a manipular es /dev/sda.
 2. `resizepart` -> Es un subcomando de `parted` que se utiliza para redimensionar una partición existente.
 3. `1` -> Es el número de la partición que se va a redimensionar (dev/sda1).
@@ -198,6 +198,7 @@ dinámico mediante una expresión aritmética en shell.
 > - `1024` -> Convierte el tamaño a KiB.
 > - `/512` -> Divide el tamaño total en bytes entre 512 que es el tamaño típico de un sector.
 > - `-1` -> Ajusta el cálculo para terminar en el sector correcto.
+> - `s` -> Se refiere a sectores.
 
 5. ~# `parted /dev/sda unit s print` -> Con éste comando ahora veremos los cambios realizados en el disco.
 
@@ -226,7 +227,7 @@ compararemos con la que teníamos antes de hacer la segunda instalación:
 > [!TIP]
 > Usaremos el comando 
 > ```bash 
-> sudo parted /dev/sda unit s print`
+> sudo parted /dev/vda unit s print`
 >```
 
 ##### Instalación Adicional UEFI
@@ -271,7 +272,7 @@ Ahora también mostraremos por pantalla la tabla de particiones para compararla 
 antes de hacer la segunda instalación.
 
 ```bash
-sudo parted /dev/sda unit s print
+sudo parted /dev/vda unit s print
 ```
 
 #### Recuperación del bootloader (GRUB)
@@ -282,7 +283,7 @@ Ahora arrancamos con alguna de nuestras instalaciones que hemos hecho en la máq
 contenido de los primeros 446 bytes del disco:
 
 ``` bash
-sudo xxd -l 446 /dev/sda
+sudo xxd -l 446 /dev/vda
 ```
 
 Los bytes que estamos viendo forman parte del MBR (Master Boot Record) y ahí es donde hemos instalado la primera 
@@ -290,12 +291,12 @@ etapa del bootloader (GRUB). Ahora vamos a destrozar el MBR usando el comando `d
 446 bytes:
 
 - $ ``` bash
-sudo dd if/dev/zero of=/dev/sda bs=446 count=1 ```
+sudo dd if/dev/zero of=/dev/vda bs=446 count=1 ```
 
 > [!NOTE]
 > Si ahora hacemos
 > ``` bash
-> sudo xxd -l 446 /dev/sda
+> sudo xxd -l 446 /dev/vda
 > ```
 > podremos ver que todos los bytes ahora están a 0.
 
@@ -312,6 +313,73 @@ Si observamos el contenido de los primeros 446 bytes del disco duro de la máqui
 veremos que todos los bytes están a 0.
 
 ``` bash
-sudo xxd -l 446 /dev/sda
+sudo xxd -l 446 /dev/vda
 ```
 
+> [!TIP]
+> ¿Por qué ocurre esto?
+> <respuesta>
+> ¿Donde se encuentra instalada la primera etapa de GRUB en una máquina UEFI?
+> <respuesta>
+> Si instalase un nuevo sistema operativo que añadiese su propio bootloader sin soporte 
+> para arrancar linux, ¿Necesitaría usar un disco de rescate para recuperar el GRUB?
+> <respuesta>
+> ¿Cómo lo haría?
+> <respuesta>
+> Documenta la utilidad del comando efibootmgr y explica que alternativas tendrías a su uso.
+> <respuesta>
+
+##### SYSLINUX versus GRUB
+
+Comenta las diferencias que observas en ambas máquinas a nivel de `bootloader`.
+
+¿Por qué el menú que aparece justo después de arrancar el instalador es ligeramente diferente si
+arrancamos con BIOS o lo hacemos con UEFI?
+
+#### Cambio del orden de arranque por defecto
+
+Documéntate lo que necesites para cambiar el orden de arranque por defecto de ambas instalaciones en
+sendas máquinas.
+
+Habilita la consola serie en el kernel que se ha instalado en el disco para que al arrancar
+veamos todo lo que está haciendo el kernel y el proceso `init` (systemd).
+
+> [!TIP]
+> Para ello agregamos `console=ttyS0` en el fichero `/etc/default/grub`
+> y también tenemos que eliminar la configuración del arranque silencioso
+> `quiet`.
+
+
+Observa que de todos modos, siempre podremos acceder a esa información una vez arrancada la máquina
+mediante el comando `dmesg` y las opciones adecuadas.
+
+
+> [!TIP]
+> Explica la relación que existe entre el fichero `/etc/default/grub`
+> y los comandos `update-grub` y `grub-install` con la realización de
+> estas tareas, tanto para la máquinan BIOS como para la máquina UEFI.
+> Verifica tus explicacione de un modo práctico.
+
+#### Utilidad del initial ramdisk
+
+> [!IMPORTANT]
+> Documéntate acerca de la utilidad de un `initial ramdisk` en linux
+> explica que papel juega en el arranque del sistema operativo.
+
+#### Diferencias entre MBR/GPT
+
+- Por último, compara el particionado final de ambas máquinas mostrando las
+diferencias y similitudes que encuentres. 
+
+- Explica las ventajas de usar un particionado GPT, para lo cuál deberás documentarte.
+
+- Atento a la explicación que das de la partición EFI y para que se usa.
+
+- ¿Donde se encuentra la tabla de particiones MBR?
+
+- ¿Cuánto ocupa?
+
+- ¿Cuál es su estructura?
+
+> [!TIP]
+> Utiliza el comando `xxd` para mostrar algunos de los valores más importantes de ambas tablas.
