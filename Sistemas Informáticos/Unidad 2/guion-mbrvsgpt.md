@@ -8,7 +8,7 @@ seguido de sus respectivos parámetros.
 ```bash
 virt-install \
  --name bios \
- --memery 1024 \
+ --memory 1024 \
  --disk size=8 \
  --graphics none \
  --cdrom /ruta/a/la/iso \
