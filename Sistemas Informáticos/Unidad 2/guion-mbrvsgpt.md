@@ -128,7 +128,7 @@ redimensionado.
 Escribiremos ´virsh start --console <dominio>´.
 
 En cuanto cargue la máquina virtual deberemos de pulsar la tecla `ESC` repetidamente hasta que
-nos salga un menú. En este menú deberemos de escoger la tercera opción `Advanced Options`
+nos salga un menú, seleccionamos la opción 3 y en el siguiente menú deberemos de escoger la tercera opción `Advanced Options`
 
 
 Una vez dentro de este menú nos situaremos encima de la opción `Rescue Mode` o `Modo Rescate` y
