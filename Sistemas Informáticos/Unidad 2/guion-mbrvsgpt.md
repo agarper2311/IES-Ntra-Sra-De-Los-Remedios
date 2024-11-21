@@ -87,7 +87,8 @@ por la consola serie
 > Para tener soporte de la consola serie en el instalador tenemos que añadir 
 > la opción `console=ttyS0` en el menú correspondiente pulsando la tecla `e`
 > y luego continuar con el arranque pulsando `CTRL+X`, aprovacharemos también
-> para poner un tema oscuro a la consola serie con `theme=dark`.
+> para poner un tema oscuro a la consola serie con `theme=dark`. Estos parámetros
+> se escriben antes del parámetro ---quiet.
 
 
 #### Redimensionado de particiones
