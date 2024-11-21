@@ -107,7 +107,7 @@ de la instalación de cada máquina (debbios1 y debuefi1) a 4 GB cada una.
 
 Una vez dentro del XML localizaremos el elemento `<disk type=’file’ device=’cdrom’>` y dentro
 de ese elemento agregamos la siguiente línea:
-`<source=file='/srv/SIINF/debian-12.2.0-amd64-netinst.iso/>'`
+`<source file='/srv/SIINF/debian-12.2.0-amd64-netinst.iso/>'`
 
 
 > [!NOTE]
