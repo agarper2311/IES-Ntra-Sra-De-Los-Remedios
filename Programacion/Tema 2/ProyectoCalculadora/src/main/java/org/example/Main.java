@@ -54,7 +54,6 @@ public class Main {
                 case 10 -> areaRctgl();
                 case 11 -> sucFibonacci();
                 case 12 -> tabla();
-                case 13 -> notaExamen();
                 default -> System.out.println("Opción inválida. Por favor, selecciona una opción válida.");
             }
         }
@@ -79,7 +78,7 @@ public class Main {
         System.out.println("*--------------------------------------*");
         System.out.println("| 8. Area Circ  9. Area Trgl  10. Area |");
         System.out.println("| Rectangulo  11. Suc. Fibonacci       |");
-        System.out.println("| 12.Tabla multiplica  13.NotaMedia    |");
+        System.out.println("| 12.Tabla multiplica                  |");
         System.out.println("*--------------------------------------*");
         System.out.println("|               0. Salir               |");
         System.out.println("*--------------------------------------*");
@@ -232,21 +231,6 @@ public class Main {
             }
         } while (!num.equals("salir"));
 
-    public static void notaExamen(){
 
-         Scanner scanner = new Scanner(System.in);
-        double int1, int2;
-
-        System.out.println("Introduzca su nota 1:");
-        int1 = scanner.nextDouble();
-
-        System.out.println("Introduzca su nota 2:");
-        int2 = scanner.nextDouble();
-
-        double sumanota = int1 + int2;
-        double media = sumanota / 2;
-        int not = (int) Math.round(media);  // Redondear la media
-
-        System.out.println("La nota final entre tus dos exámenes es: " + not);
-    }
+}
 }
