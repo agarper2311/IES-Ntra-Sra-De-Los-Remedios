@@ -1,5 +1,34 @@
 # SIINF
 
+
+
+- [Objetivo](#objetivo)
+- [Enunciado](#enunciado)
+  - [Instalaciones iniciales](#instalaciones-iniciales)
+    - [Instalación BIOS](#instalación-bios)
+    - [Instalación UEFI](#instalación-uefi)
+  - [Redimensionado de particiones](#redimensionado-de-particiones)
+    - [Redimensionado BIOS](#redimensionado-bios)
+    - [Redimensionado UEFI](#redimensionado-uefi)
+  - [Instalaciones adicionales](#instalaciones-adicionales)
+    - [Instalación adicional BIOS](#instalación-adicional-bios)
+    - [Instalación adicional UEFI](#instalación-adicional-uefi)
+  - [Recuperación del bootloader (GRUB)](#recuperación-del-bootloader-grub)
+    - [BIOS (tras el borrado del MBR)](#bios-tras-el-borrado-del-mbr)
+    - [UEFI (tras instalar otro SO con bootloader propio)](#uefi-tras-instalar-otro-so-con-bootloader-propio)
+    - [SYSLINUX versus GRUB](#syslinux-versus-grub)
+  - [Cambio del orden de arranque por defecto](#cambio-del-orden-de-arranque-por-defecto)
+  - [Utilidad del initial ramdisk](#utilidad-del-initial-ramdisk)
+  - [Diferencias entre MBR/GPT](#diferencias-entre-mbrgpt)
+- [A tener en cuenta](#a-tener-en-cuenta)
+- [Número de horas a dedicar](#número-de-horas-a-dedicar)
+- [Ficheros a entregar](#ficheros-a-entregar)
+- [Resultados de aprendizaje trabajados en la actividad](#resultados-de-aprendizaje-trabajados-en-la-actividad)
+- [Criterios de evaluación utilizados en la calificación](#criterios-de-evaluación-utilizados-en-la-calificación)
+- [Más info](#más-info)
+
+
+
 ## Particionado MBR vs GPT en arranques BIOS vs UEFI
 
 ### Objetivo
@@ -28,11 +57,16 @@ creando cuenta para el usuario `root`, hacemos un particionado "para
 novatos", y configuramos el proxy de paquetes. Tampoco instalamos un
 sistema gráfico de escritorio, pero sí el servidor SSH.
 
-_IMPORTANTE_: Si tienes problemas al usar los cursores en el menú de
-GRUB, desconecta el cable de la consola serie (`CTRL+]`), ejecuta el
-comando `reset` y vuelve a conectarte a la consola de la máquina con
-`virsh console <dominio>`. Para salir de la consola de GRUB tienes que
-usar el comando `exit`.
+_IMPORTANTE_: Si tienes problemas al usar los cursores en el menú
+inicial de GRUB, desconecta el cable de la consola serie (`CTRL+]`),
+ejecuta el comando `reset` y vuelve a conectarte a la consola de la
+máquina con `virsh console <dominio>`. Para salir de la consola de GRUB
+tienes que usar el comando `exit`.
+
+_IMPORTATE_: Es muy recomendable llevar a cabo un `reset` justo antes de
+usar un `virt-install`. De esta manera garantizamos que la consola serie
+es resetado justo después de haber sido usada y justo antes de volverla
+a usar.
 
 ##### Instalación BIOS
 
@@ -43,9 +77,8 @@ que arranque en modo BIOS (es el arranque por defecto).
         --memory 1024 \
         --disk size=8 \
         --graphics none \
-        --cdrom /srv/SIINF/debian-12.2.0-amd64-netinst.iso \
-        --boot bootmenu.enable=on,bios.useserial=on \
-        --osinfo detect=on
+        --cdrom /srv/SIINF/debian-12.7.0-amd64-netinst.iso \
+        --boot bootmenu.enable=on,bios.useserial=on
 
 Para habilitar el menú de selección de dispositivo de arranque de la
 BIOS (lo usaremos posteriormente) y que además la propia BIOS "hable"
@@ -62,27 +95,37 @@ será `debbios1`.
 
 ##### Instalación UEFI
 
-Haz una instalación de debian en una máquina virtual con nombre `uefi` y
-que arranque en modo UEFI:
+Haz una instalación de debian en una máquina virtual con nombre `uefi`,
+sin hardware gráfico y que arranque en modo UEFI:
 
     virt-install --name uefi \
         --memory 1024 \
         --disk size=8 \
         --graphics none \
-        --cdrom /srv/SIINF/debian-12.2.0-amd64-netinst.iso \
-        --boot uefi \
-        --osinfo detect=on
+        --cdrom /srv/SIINF/debian-12.7.0-amd64-netinst.iso \
+        --boot uefi
 
 Para crear una máquina que arranque en modo UEFI hemos tenido que usar
 el parámetro `--boot uefi`. La UEFI ya "habla" por defecto por la
-consola serie.
+consola serie, por lo que para interactuar con ella no es necesario
+añadir el parámetro `console=ttyS0` a la hora de crear la máquina
+virtual con `virt-install`.
 
-Para tener soporte de consola serie en el instalador tienes que añadir
-la opción `console=ttyS0` en el menú correspondiente pulsando la tecla
-`e` y luego continuar con el arranque pulsando `CTRL+x`. También puedes
-aprovechar para añadir un tema de consola oscuro con `theme=dark`. El
-nombre de máquina a nivel de sistema operativo que usaremos para esta
-instalación será `debuefi1`.
+Pero para tener soporte de consola serie en el instalador sí que debes
+añadir la opción `console=ttyS0` en el menú correspondiente (_Install_)
+pulsando la tecla `e` y luego continuar con el arranque pulsando
+`CTRL+x`. También puedes aprovechar para añadir un tema de consola
+oscuro con `theme=dark`.
+
+_IMPORTANTE_: Cuidado con el lugar que eliges para añadir los parámetros
+anteriores. Tienes que hacerlo a continuación de `vga=788` y antes de la
+cadena `---`. Cuidado también con los espacios en blanco. Si cometes un
+error al introducir el texto puedes usar la tecla `ESC` para empezar de
+nuevo.
+
+El nombre de máquina a nivel de sistema operativo que usaremos para esta
+instalación será `debuefi1`. Recuerda que NO vamos a instalar ningún
+sistema gráfico de escritorio, pero sí un servidor de SSH.
 
 #### Redimensionado de particiones
 
@@ -112,13 +155,19 @@ CD/DVD. La manera de acceder a dicho menú será diferente dependiendo del
 tipo de arranque que estemos usando: BIOS versus UEFI (ver el siguiente
 apartado de instalaciones adicionales).
 
-Ahora tendremos que seleccionar el modo rescate (no olvides volver a
-pasar al kernel del instalador los parámetros `console=ttyS0` y
-`theme=dark`) y tras responder a las preguntas del asistente, debemos
-acabar teniendo acceso a una consola de comandos que nos ha de permitir
-redimensionar la partición que nos interesa. Para ello básicamente
-tendremos que usar (y por ese orden) los comandos `e2fsck`, `resize2fs`
-y `parted`.
+Ahora tendremos que seleccionar el modo rescate en el menú de "Opciones
+avanzadas..." (no olvides volver a pasar al kernel del instalador los
+parámetros `console=ttyS0` y `theme=dark`) y tras responder a las
+preguntas del asistente, debemos acabar teniendo acceso a una consola de
+comandos que nos ha de permitir redimensionar la partición que nos
+interesa. Para ello básicamente tendremos que usar (y por ese orden) los
+comandos `e2fsck`, `resize2fs` y `parted`.
+
+**IMPORTANTE**: Cuando en modo rescate se nos pide que seleccionemos un
+dispositivo como sistema de ficheros raíz, debemos responder que "No use
+ningún sistema de ficheros raíz", ya que vamos a manipular la tabla de
+particiones y para ello no debemos estar usando ninguna de las
+particiones del disco.
 
 En el caso de este último comando es aconsejable usar los sectores como
 unidad de medida con el subcomando `unit`. Observa que manejaremos
@@ -133,9 +182,9 @@ partición, y la pista te la va a dar la salida del comando `resize2fs`.
 
 ##### Redimensionado BIOS
 
-    ~ # parted /dev/sda unit s print
+    ~ # parted /dev/vda unit s print
     Model: Virtio Block Device (virtblk)
-    Disk /dev/sda: 16777216s
+    Disk /dev/vda: 16777216s
     Sector size (logical/physical): 512B/512B
     Partition Table: msdos
     Disk Flags:
@@ -145,30 +194,30 @@ partición, y la pista te la va a dar la salida del comando `resize2fs`.
      2      14778366s  16775167s  1996802s   extended
      5      14778368s  16775167s  1996800s   logical   linux-swap(v1)
 
-    ~ # e2fsck -f /dev/sda1
+    ~ # e2fsck -f /dev/vda1
     e2fsck 1.46.2 (28-Feb-2021)
     Pass 1: Checking inodes, blocks, and sizes
     Pass 2: Checking directory structure
     Pass 3: Checking directory connectivity
     Pass 4: Checking reference counts
     Pass 5: Checking group summary information
-    /dev/sda1: 32244/462384 files (0.2% non-contiguous), 309406/1846784 blocks
+    /dev/vda1: 32244/462384 files (0.2% non-contiguous), 309406/1846784 blocks
 
-    ~ # resize2fs /dev/sda1 4G
+    ~ # resize2fs /dev/vda1 4G
     resize2fs 1.46.2 (28-Feb-2021)
-    Resizing the filesystem on /dev/sda1 to 1048576 (4k) blocks.
-    The filesystem on /dev/sda1 is now 1048576 (4k) blocks long.
+    Resizing the filesystem on /dev/vda1 to 1048576 (4k) blocks.
+    The filesystem on /dev/vda1 is now 1048576 (4k) blocks long.
 
-    ~ # parted /dev/sda resizepart 1 $((2048+1048576*4*1024/512-1))s
+    ~ # parted /dev/vda resizepart 1 $((2048+1048576*4*1024/512-1))s
     Warning: Shrinking a partition can cause data loss, are you sure you want to
     continue?
     Yes/No? yes
     yes
     Information: You may need to update /etc/fstab.
 
-    ~ # parted /dev/sda unit s print
+    ~ # parted /dev/vda unit s print
     Model: Virtio Block Device (virtblk)
-    Disk /dev/sda: 16777216s
+    Disk /dev/vda: 16777216s
     Sector size (logical/physical): 512B/512B
     Partition Table: msdos
     Disk Flags:
@@ -180,9 +229,9 @@ partición, y la pista te la va a dar la salida del comando `resize2fs`.
 
 ##### Redimensionado UEFI
 
-    ~ # parted /dev/sda unit s print
+    ~ # parted /dev/vda unit s print
     Model: Virtio Block Device (virtblk)
-    Disk /dev/sda: 16777216s
+    Disk /dev/vda: 16777216s
     Sector size (logical/physical): 512B/512B
     Partition Table: gpt
     Disk Flags:
@@ -192,30 +241,30 @@ partición, y la pista te la va a dar la salida del comando `resize2fs`.
      2      1050624s   14774271s  13723648s  ext4
      3      14774272s  16775167s  2000896s   linux-swap(v1)        swap
 
-    ~ # e2fsck -f /dev/sda2
+    ~ # e2fsck -f /dev/vda2
     e2fsck 1.46.2 (28-Feb-2021)
     Pass 1: Checking inodes, blocks, and sizes
     Pass 2: Checking directory structure
     Pass 3: Checking directory connectivity
     Pass 4: Checking reference counts
     Pass 5: Checking group summary information
-    /dev/sda2: 32285/429088 files (0.2% non-contiguous), 310579/1715456 blocks
+    /dev/vda2: 32285/429088 files (0.2% non-contiguous), 310579/1715456 blocks
 
-    ~ # resize2fs /dev/sda2 4G
+    ~ # resize2fs /dev/vda2 4G
     resize2fs 1.46.2 (28-Feb-2021)
-    Resizing the filesystem on /dev/sda2 to 1048576 (4k) blocks.
-    The filesystem on /dev/sda2 is now 1048576 (4k) blocks long.
+    Resizing the filesystem on /dev/vda2 to 1048576 (4k) blocks.
+    The filesystem on /dev/vda2 is now 1048576 (4k) blocks long.
 
-    ~ # parted /dev/sda resizepart 2 $((1050624+1048576*4*1024/512-1))s
+    ~ # parted /dev/vda resizepart 2 $((1050624+1048576*4*1024/512-1))s
     Warning: Shrinking a partition can cause data loss, are you sure you want to
     continue?
     Yes/No? yes
     yes
     Information: You may need to update /etc/fstab.
 
-    ~ # parted /dev/sda unit s print
+    ~ # parted /dev/vda unit s print
     Model: Virtio Block Device (virtblk)
-    Disk /dev/sda: 16777216s
+    Disk /dev/vda: 16777216s
     Sector size (logical/physical): 512B/512B
     Partition Table: gpt
     Disk Flags:
@@ -248,57 +297,75 @@ Para acceder al menú de selección de dispositivo de arranque hay que
 pulsar la tecla `ESC` nada más encender la máquina.
 
 Tras hacer la segunda instalación no configuraremos una partición de
-swap en el instalador y lo dejaremos para el primer arranque, añadiendo
-la entrada correspondiente en el fichero `/etc/fstab` que será igual a
-la existente en la primera instalación que realizamos. El nombre de
-máquina a nivel de sistema operativo que usaremos para esta segunda
-instalación será `debbios2`.
+swap en el instalador y lo dejaremos pendiente para realizar tras el
+primer arranque, añadiendo para ello la entrada correspondiente en el
+fichero `/etc/fstab` que será igual a la existente en la primera
+instalación BIOS que realizamos.
 
-Deberías sacar por pantalla la tabla de particiones para compararla con
-la que teníamos antes de hacer esta segunda instalación:
+El nombre de máquina a nivel de sistema operativo que usaremos para esta
+segunda instalación será `debbios2`.
 
-    sudo parted /dev/sda unit s print
+Deberías sacar por pantalla la nueva tabla de particiones para
+compararla con la que teníamos antes de hacer esta segunda instalación:
+
+    sudo parted /dev/vda unit s print
 
 ##### Instalación adicional UEFI
 
 Para acceder al menú de selección de dispositivo de arranque tendrás que
 pulsar la tecla `ESC` nada más encender la máquina o entrar a la UEFI,
-usando el menú correspondiente de GRUB.
+usando el menú correspondiente de GRUB. Una vez en ella, tendrás que
+arrancar desde el DVD-ROM con la opción `Boot Manager`.
 
-Tras hacer la segunda instalación, en esta ocasión reutilizaremos la
-partición swap y dejaremos que el instalador la formatee de nuevo (esa
-es la opción por defecto, marcada con `F` en el resumen de la tabla de
-particiones). Esto implica que habrá que cambiar el UUID de la partición
-swap en el fichero `/etc/fstab` de la primera instalación que hicimos
-`debuefi1`.
+El nombre de máquina a nivel de sistema operativo que usaremos para esta
+segunda instalación será `debuefi2`.
+
+En esta segunda instalación, reutilizaremos la partición swap y
+dejaremos que el instalador la formatee de nuevo (esa es la opción por
+defecto, marcada con `F` en el resumen de la tabla de particiones).
+
+Al terminar esta segunda instalación y tras reiniciar, verás que el menú
+de GRUB te permite escoger entre los dos sistemas operativos instalados.
+Con la primera de las opciones podrás arrancar la segunda de las
+instalaciones, y con la tercera podrás arrancar la primera de las
+instalaciones.
+
+Si arrancas la primera de las instalaciones, verás que tarda de dos a
+tres minutos en hacerlo. Sé paciente y espera, porque una vez arrancada
+tendrás que llevar a cabo los siguientes pasos para que no se produzca
+esta demora:
+
+Tienes que modificar el UUID de la partición swap en el fichero
+`/etc/fstab`, porque al haber sido formateada de nuevo esa partición
+durante las segunda de las instalaciones su UUID ha cambiado.
 
 Podemos saber el nuevo UUID de la partición swap haciendo:
 
     sudo blkid
 
-Podemos visualizar detalladamente el uso de la swap que está haciendo el
-sistema mediante el comando:
+NOTA: Podemos visualizar detalladamente el uso de la swap que está
+haciendo el sistema mediante el comando:
 
     sudo swapon --output-all
 
-Con este cambio de UUID el arranque no se ralentizará cuando llegue el
+Con este cambio de UUID, el arranque no se ralentizará cuando llegue el
 momento de montar las particiones según indica el fichero `/etc/fstab`.
 
-También es aconsejable actualizar la variable `RESUME` en el fichero
+También tendrás que actualizar la variable `RESUME` en el fichero
 `/etc/initramfs-tools/conf.d/resume` usando el nuevo UUID de la
 partición de intercambio y regenerar el fichero `initrd` usando el
 comando:
 
-    sudo dpkg-reconfigure linux-image-6.1.0-17-amd64
+    sudo dpkg-reconfigure linux-image-6.1.0-28-amd64
 
-Con este cambio de UUID el arranque no se ralentizará en la etapa
+Con este cambio de UUID, el arranque no se ralentizará en la etapa
 inicial relacionada con el initial ramdisk.
 
-No olvides tampoco sacar por pantalla de nuevo la tabla de particiones
-para compararla con la que teníamos antes de hacer esta segunda
-instalación:
+Por último, no olvides tampoco sacar por pantalla de nuevo la tabla de
+particiones para compararla con la que teníamos antes de hacer esta
+segunda instalación:
 
-    sudo parted /dev/sda unit s print
+    sudo parted /dev/vda unit s print
 
 #### Recuperación del bootloader (GRUB)
 
@@ -307,19 +374,19 @@ instalación:
 Arranca con alguna de las instalaciones que hiciste en la máquina `bios`
 y comprueba el contenido de los primeros 446 bytes del disco:
 
-    sudo xxd -l 446 /dev/sda
+    sudo xxd -l 446 /dev/vda
 
 Estos bytes forman parte del MBR (Master Boot Record) y ahí es donde
 hemos instalado la primera etapa del bootloader (GRUB). A continuación
 destroza ese MBR usando el comando `dd`, poniendo a cero esos primeros
 446 bytes:
 
-    $ sudo dd if=/dev/zero of=/dev/sda bs=446 count=1
+    $ sudo dd if=/dev/zero of=/dev/vda bs=446 count=1
     1+0 records in
     1+0 records out
     446 bytes copied, 0.000209366 s, 2.1 MB/s
 
-Si ahora vuelves a hacer `sudo xxd -l 446 /dev/sda`, observarás que
+Si ahora vuelves a hacer `sudo xxd -l 446 /dev/vda`, observarás que
 efectivamente todos esos bytes ahora son cero.
 
 Prueba a arrancar de nuevo y observa que nos quedamos sin poder iniciar
@@ -332,7 +399,7 @@ rescate.
 Si observas el contenido de los primeros 446 bytes del disco duro de la
 máquina `uefi` verás que todos los bytes ya son cero:
 
-    sudo xxd -l 446 /dev/sda
+    sudo xxd -l 446 /dev/vda
 
 ¿Por qué ocurre esto? ¿Dónde se encuentra instalada la primera etapa de
 GRUB en una máquina UEFI? Si instalases un nuevo sistema operativo que
