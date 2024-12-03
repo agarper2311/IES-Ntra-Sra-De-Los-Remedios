@@ -5,18 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="90caf5be-0615-45e8-8409-e6566c09b7ed" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Tema 2/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Tema 2/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Ejercicio2/Ejercicio2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ejercicio2/Ejercicio2.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +41,7 @@
   "keyToString": {
     "Gradle.Tema-3 [:Ejercicio1.main()].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "<unknown>",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
@@ -78,7 +68,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1733211829977</updated>
-      <workItem from="1733211831732" duration="485000" />
+      <workItem from="1733211831732" duration="858000" />
     </task>
     <servers />
   </component>
