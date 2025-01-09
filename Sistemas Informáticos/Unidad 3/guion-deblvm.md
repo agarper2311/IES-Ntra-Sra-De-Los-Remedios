@@ -42,6 +42,8 @@ Usaremos el particionado guiado y separaremos la partición `/home`. Le daremos 
 >   que tamaño tienen y para qué se usan en cada caso.
 >
 > - El instalador crea una partición que monta en `/boot`. ¿Para que sirve esa partición?
+>   _Esa partición sirve para iniciar el sistema ya que contiene el GRUB y los archivos necesarios
+>   para iniciar el sistema con lo cuál es necesario que esté fuera del LVM_
 > 
 > - ¿Existe algún motivo por el que lo haga de esa manera?
 > 
