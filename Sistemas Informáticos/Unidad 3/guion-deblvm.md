@@ -18,3 +18,7 @@ Vamos a realizar una instalación mínima de una máquina debian con las siguien
 > primer disco duro completo (el de 6 Gb) y configurando el LVM desde el instalador. Inicialmente NO HAY QUE TOCAR
 > NADA DEL SEGUNDO DISCO DURO.
 
+Usaremos el particionado guiado y separaremos la partición /home. Le daremos todo el espacio posible al Grupo de Volumen (VG) que crea el instalador e instalaremos GRUB en el MBR del primer disco duro.
+
+> [!NOTE]
+> - Realizar una instalación usando LVM en la que expliques qué está ocurriendo en cada una de las pantallas correspondientes a la fase del particionado.
