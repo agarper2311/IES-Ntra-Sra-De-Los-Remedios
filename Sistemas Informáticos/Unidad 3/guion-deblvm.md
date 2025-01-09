@@ -41,4 +41,4 @@ Usaremos el particionado guiado y separaremos la partición /home. Le daremos to
 > - Analizar las particiones físicas creadas de los VG así como los LV, indicando claramente
 >   que tamaño tienen y para qué se usan en cada caso.
 >
-> - El instalador crea una partición que monta en '/boot'. ¿Para que sirve esa partición?
+> - El instalador crea una partición que monta en `/boot`. ¿Para que sirve esa partición?
