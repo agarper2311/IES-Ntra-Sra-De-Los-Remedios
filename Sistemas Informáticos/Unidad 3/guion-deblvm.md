@@ -94,7 +94,7 @@ Usaremos el particionado guiado y separaremos la partición `/home`. Le daremos 
   último paso sería una buena práctica? ¿Por qué?
 
 
-> [!TIPS]
+> [!TIP]
 > Antes de redimensionar cualquier cosa es bueno ver su tamaño actual, así
 > como comprobar el nuevo tamaño una vez se haya realizado el
 > redimensionado. Para ello se pueden usar los comandos `pvs`/`pvdisplay`
