@@ -20,7 +20,7 @@ El comando a usar para la creación de la máquina virtual es el siguiente:
 virt-install --name deblvm \
 --memory 1024 \
 --disk size=6 --disk size=4 \
---location /srv/SIINF/debian-12.2.0-amd64-netinst.iso \
+--location /srv/SIINF/debian-12.7.0-amd64-netinst.iso \
 --graphics none \
 --console pty,target.type=serial \
 --extra-args "console=ttyS0 theme=dark" \
