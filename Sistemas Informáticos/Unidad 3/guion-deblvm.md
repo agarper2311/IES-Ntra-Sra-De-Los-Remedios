@@ -43,13 +43,19 @@ Usaremos el particionado guiado y separaremos la partición `/home`. Le daremos 
    que tamaño tienen y para qué se usan en cada caso.
 
  - El instalador crea una partición que monta en `/boot`. ¿Para que sirve esa partición?
-   _Esa partición sirve para iniciar el sistema ya que contiene el GRUB y los archivos necesarios
-   para iniciar el sistema con lo cuál es necesario que esté fuera del LVM_
+   Esa partición sirve para iniciar el sistema ya que contiene el GRUB y los archivos necesarios
+   para iniciar el sistema con lo cuál es necesario que esté fuera del LVM
  
  - ¿Existe algún motivo por el que lo haga de esa manera?
   1. Acceso directo del cargador de arranque: aunque los GRUB modernos pueden trabajar con LVM,
      antigüamente había limitaciones. Esta configuración asegura la compatibilidad con sistemas más antigüos
      o problemáticos.
+  2. Facilidad de recuperación: Si el LVM falla, los archivos de arranque (kernel, initramfs, configuración de GRUB)       permanecen accesibles en una partición estándar, facilitando la reparación del sistema.
+  3. Aislamiento y estabilidad: Mantener los archivos de arranque separados reduce riesgos de corrupción por problemas en los volúmenes lógicos y asegura un entorno de arranque confiable.
+  4. Tamaño fijo y simplicidad: `/boot` no necesita redimensionarse frecuentemente, lo que la hace ideal como una partición estática independiente.
+
+     Esta configuración garantiza un arranque robusto, compatible y fácilmente recuperable, incluso en sistemas complejos como los que usan LVM.
+
  
  - Explica las diferencias que observas entre el particionado que ha hecho
  el instalador en la máquina virtual y el que hay en alguna de las máquinas 
