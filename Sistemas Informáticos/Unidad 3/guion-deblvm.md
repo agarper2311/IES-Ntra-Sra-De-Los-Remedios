@@ -34,6 +34,51 @@ virt-install --name deblvm \
 
 Usaremos el particionado guiado y separaremos la partición `/home`. Le daremos todo el espacio posible al Grupo de Volumen (VG) que crea el instalador e instalaremos GRUB en el MBR del primer disco duro.
 
+
+
+## Una vez hallamos realizado la instalación.
+
+- Crea un PV que use el segundo disco duro en su totalidad
+- Añade ese PV al único VG que hay creado ahora mismo.
+- Extiende en 3G adicionales el tamaño del LV usado para la raíz del
+  sistema de ficheros. No olvides redimensionar ese sistema de ficheros
+  con el comando `resize2fs`.
+- Apaga la máquina virtual creada, añade 2G al fichero imagen del
+  segundo de los discos duros, vuelve a encender la máquina y comprueba
+  con `fdisk` que el tamaño de ese disco ha crecido en consonancia.
+  Redimensiona el PV asociado a este dispositivo y comprueba que el VG
+  también crece en consonancia.
+- Vuelve a apagar la máquina, y vuelve a añadir 2G, pero esta vez al
+  fichero imagen del primero de los discos duros (el dispositivo en el
+  que se hizo la instalación)
+- Enciende de nuevo la máquina, y comprueba que el tamaño de ese primer
+  disco ha crecido en consonancia. Crea una nueva partición física
+  primaria que ocupe todo ese espacio nuevo (comando `fdisk`)
+- Añade la partición recién creada al LVM, es decir, crea un nuevo PV en
+  esa partición. Añade ese PV al VG con el que estamos trabajando y
+  comprueba que su tamaño vuelve a crecer en consonancia.
+- Añade todo el espacio que te queda en el VG al LV usado para `/home`
+  (ya no es necesario recordar que tienes que redimensionar el sistema
+  de ficheros correspondiente con `resize2fs`, ¿verdad?). ¿Hacer este
+  último paso sería una buena práctica? ¿Por qué?
+
+
+> [!TIP]
+> Antes de redimensionar cualquier cosa es bueno ver su tamaño actual, así
+> como comprobar el nuevo tamaño una vez se haya realizado el
+> redimensionado. Para ello se pueden usar los comandos `pvs`/`pvdisplay`
+> en caso de tratarse de un PE, `vgs`/`vgdisplay` en caso de tratarse de
+> un VG o `lvs`/`lvdisplay` en caso de tratarse de un LV.
+>
+> Para añadir espacio adicional a los volúmenes `libvirt` se pueden usar
+> tanto el comando `qemu-img` como el comando `virsh vol-resize`.
+>
+> Los comandos `lsblk` y `virsh domblklist` te pueden ser de ayuda.
+>
+> Para añadir todo el espacio que queda en el VG a uno de sus LVs puedes
+> usar el comando `lvextend -l +100%FREE /dev/deblvm-vg/home`.
+
+
 ## Preguntas a Responder
 
  - Realizar una instalación usando LVM en la que expliques qué está ocurriendo en cada una
@@ -78,45 +123,3 @@ Usaremos el particionado guiado y separaremos la partición `/home`. Le daremos 
       /dev/vda4 239745024 240893951 1148928 561M Entorno de recuperación de Windows
       /dev/vda5 240896000 466860031 225964032 107,7G Sistema de ficheros de Linux
       /dev/vda6 466860032 468860927 2000896 977M Linux swap
-
-## Una vez hallamos realizado la instalación.
-
-- Crea un PV que use el segundo disco duro en su totalidad
-- Añade ese PV al único VG que hay creado ahora mismo.
-- Extiende en 3G adicionales el tamaño del LV usado para la raíz del
-  sistema de ficheros. No olvides redimensionar ese sistema de ficheros
-  con el comando `resize2fs`.
-- Apaga la máquina virtual creada, añade 2G al fichero imagen del
-  segundo de los discos duros, vuelve a encender la máquina y comprueba
-  con `fdisk` que el tamaño de ese disco ha crecido en consonancia.
-  Redimensiona el PV asociado a este dispositivo y comprueba que el VG
-  también crece en consonancia.
-- Vuelve a apagar la máquina, y vuelve a añadir 2G, pero esta vez al
-  fichero imagen del primero de los discos duros (el dispositivo en el
-  que se hizo la instalación)
-- Enciende de nuevo la máquina, y comprueba que el tamaño de ese primer
-  disco ha crecido en consonancia. Crea una nueva partición física
-  primaria que ocupe todo ese espacio nuevo (comando `fdisk`)
-- Añade la partición recién creada al LVM, es decir, crea un nuevo PV en
-  esa partición. Añade ese PV al VG con el que estamos trabajando y
-  comprueba que su tamaño vuelve a crecer en consonancia.
-- Añade todo el espacio que te queda en el VG al LV usado para `/home`
-  (ya no es necesario recordar que tienes que redimensionar el sistema
-  de ficheros correspondiente con `resize2fs`, ¿verdad?). ¿Hacer este
-  último paso sería una buena práctica? ¿Por qué?
-
-
-> [!TIP]
-> Antes de redimensionar cualquier cosa es bueno ver su tamaño actual, así
-> como comprobar el nuevo tamaño una vez se haya realizado el
-> redimensionado. Para ello se pueden usar los comandos `pvs`/`pvdisplay`
-> en caso de tratarse de un PE, `vgs`/`vgdisplay` en caso de tratarse de
-> un VG o `lvs`/`lvdisplay` en caso de tratarse de un LV.
->
-> Para añadir espacio adicional a los volúmenes `libvirt` se pueden usar
-> tanto el comando `qemu-img` como el comando `virsh vol-resize`.
->
-> Los comandos `lsblk` y `virsh domblklist` te pueden ser de ayuda.
->
-> Para añadir todo el espacio que queda en el VG a uno de sus LVs puedes
-> usar el comando `lvextend -l +100%FREE /dev/deblvm-vg/home`.
