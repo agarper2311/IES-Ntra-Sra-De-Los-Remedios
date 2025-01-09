@@ -46,6 +46,9 @@ Usaremos el particionado guiado y separaremos la partición `/home`. Le daremos 
 >   para iniciar el sistema con lo cuál es necesario que esté fuera del LVM_
 > 
 > - ¿Existe algún motivo por el que lo haga de esa manera?
+>  1. Acceso directo del cargador de arranque: aunque los GRUB modernos pueden trabajar con LVM,
+>     antigüamente había limitaciones. Esta configuración asegura la compatibilidad con sistemas más antigüos
+>     o problemáticos.
 > 
 > - Explica las diferencias que observas entre el particionado que ha hecho
 > el instalador en la máquina virtual y el que hay en alguna de las máquinas 
