@@ -34,25 +34,26 @@ virt-install --name deblvm \
 
 Usaremos el particionado guiado y separaremos la partición `/home`. Le daremos todo el espacio posible al Grupo de Volumen (VG) que crea el instalador e instalaremos GRUB en el MBR del primer disco duro.
 
-> [!NOTE]
-> - Realizar una instalación usando LVM en la que expliques qué está ocurriendo en cada una
->    de las pantallas correspondientes a la fase del particionado.
->
-> - Analizar las particiones físicas creadas de los VG así como los LV, indicando claramente
->   que tamaño tienen y para qué se usan en cada caso.
->
-> - El instalador crea una partición que monta en `/boot`. ¿Para que sirve esa partición?
->   _Esa partición sirve para iniciar el sistema ya que contiene el GRUB y los archivos necesarios
->   para iniciar el sistema con lo cuál es necesario que esté fuera del LVM_
-> 
-> - ¿Existe algún motivo por el que lo haga de esa manera?
->  1. Acceso directo del cargador de arranque: aunque los GRUB modernos pueden trabajar con LVM,
->     antigüamente había limitaciones. Esta configuración asegura la compatibilidad con sistemas más antigüos
->     o problemáticos.
-> 
-> - Explica las diferencias que observas entre el particionado que ha hecho
-> el instalador en la máquina virtual y el que hay en alguna de las máquinas 
-> físicas del aula. como por ejemplo la mostrada a continuación
+## Preguntas a Responder
+
+ - Realizar una instalación usando LVM en la que expliques qué está ocurriendo en cada una
+    de las pantallas correspondientes a la fase del particionado.
+
+ - Analizar las particiones físicas creadas de los VG así como los LV, indicando claramente
+   que tamaño tienen y para qué se usan en cada caso.
+
+ - El instalador crea una partición que monta en `/boot`. ¿Para que sirve esa partición?
+   _Esa partición sirve para iniciar el sistema ya que contiene el GRUB y los archivos necesarios
+   para iniciar el sistema con lo cuál es necesario que esté fuera del LVM_
+ 
+ - ¿Existe algún motivo por el que lo haga de esa manera?
+  1. Acceso directo del cargador de arranque: aunque los GRUB modernos pueden trabajar con LVM,
+     antigüamente había limitaciones. Esta configuración asegura la compatibilidad con sistemas más antigüos
+     o problemáticos.
+ 
+ - Explica las diferencias que observas entre el particionado que ha hecho
+ el instalador en la máquina virtual y el que hay en alguna de las máquinas 
+ físicas del aula. como por ejemplo la mostrada a continuación
 
 
       jcromero@daw1-1xx:~$ sudo fdisk -l
