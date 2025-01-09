@@ -35,4 +35,10 @@ virt-install --name deblvm \
 Usaremos el particionado guiado y separaremos la partición /home. Le daremos todo el espacio posible al Grupo de Volumen (VG) que crea el instalador e instalaremos GRUB en el MBR del primer disco duro.
 
 > [!NOTE]
-> - Realizar una instalación usando LVM en la que expliques qué está ocurriendo en cada una de las pantallas correspondientes a la fase del particionado.
+> - Realizar una instalación usando LVM en la que expliques qué está ocurriendo en cada una
+>    de las pantallas correspondientes a la fase del particionado.
+>   
+> - Analizar las particiones físicas creadas de los VG así como los LV, indicando claramente
+>   que tamaño tienen y para qué se usan en cada caso.
+>
+> - El instalador crea una partición que monta en "/boot". ¿Para que sirve esa partición?
