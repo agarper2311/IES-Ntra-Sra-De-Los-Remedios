@@ -42,3 +42,28 @@ Usaremos el particionado guiado y separaremos la partición `/home`. Le daremos 
 >   que tamaño tienen y para qué se usan en cada caso.
 >
 > - El instalador crea una partición que monta en `/boot`. ¿Para que sirve esa partición?
+> 
+> - ¿Existe algún motivo por el que lo haga de esa manera?
+> 
+> - Explica las diferencias que observas entre el particionado que ha hecho
+> el instalador en la máquina virtual y el que hay en alguna de las máquinas 
+> físicas del aula. como por ejemplo la mostrada a continuación
+
+
+      jcromero@daw1-1xx:~$ sudo fdisk -l
+      Disco /dev/vda: 223,57 GiB, 240057409536 bytes, 468862128 sectores
+      Modelo de disco: KINGSTON SA400S3
+      Unidades: sectores de 1 \* 512 = 512 bytes
+      Tamaño de sector (lógico/físico): 512 bytes / 512 bytes
+      Tamaño de E/S (mínimo/óptimo): 512 bytes / 512 bytes
+      Tipo de etiqueta de disco: gpt
+      Identificador del disco: F7D56B56-3C5A-447B-8671-8CD63E21B58B
+
+      Disposit. Comienzo Final Sectores Tamaño Tipo
+      /dev/vda1 264192 1286143 1021952 499M Entorno de recuperación de Windows
+      /dev/vda2 1286144 1490943 204800 100M Sistema EFI
+      /dev/vda3 1490944 239744897 238253954 113,6G Datos básicos de Microsoft
+      /dev/vda4 239745024 240893951 1148928 561M Entorno de recuperación de Windows
+      /dev/vda5 240896000 466860031 225964032 107,7G Sistema de ficheros de Linux
+      /dev/vda6 466860032 468860927 2000896 977M Linux swap
+
