@@ -16,16 +16,16 @@ Vamos a realizar una instalación mínima de una máquina debian con las siguien
 
 El comando a usar para la creación de la máquina virtual es el siguiente:
 
-´´´bash: virt-install --name deblvm \
+```bash
+virt-install --name deblvm \
 --memory 1024 \
 --disk size=6 --disk size=4 \
 --location /srv/SIINF/debian-12.2.0-amd64-netinst.iso \
 --graphics none \
 --console pty,target.type=serial \
---extra-args “console=ttyS0 theme=dark”
+--extra-args "console=ttyS0 theme=dark" \
 --osinfo detect=on
-´´´
-
+```
 
 > [!IMPORTANT]
 > La instalación se hará a partir de la ISO de debian que se encuentra en /srv/SIINF versión 12.7.0, usando el
