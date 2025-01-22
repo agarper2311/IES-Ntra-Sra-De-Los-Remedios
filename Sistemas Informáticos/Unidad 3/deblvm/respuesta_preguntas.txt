@@ -1,0 +1,63 @@
+Explica las diferencias que observas entre el particionado que ha
+  hecho el instalador en la máquina virtual y el que hay en alguna de las
+  máquinas físicas del aula,
+
+
+1. Tipo y tamaño del disco principal
+
+    Sistema 1 (garperan@deblvm):
+        Disco: /dev/sda
+        Tamaño: 6 GiB
+        Modelo: QEMU HARDDISK (indica que es un disco virtual, probablemente en un entorno de virtualización como QEMU/KVM).
+        Esquema de partición: dos (MBR).
+
+    Sistema 2 (jcromero@daw1-1xx):
+        Disco: /dev/vda
+        Tamaño: 223,57 GiB (significativamente mayor).
+        Modelo: KINGSTON SA400S3 (unidad SSD física).
+        Esquema de partición: gpt (más moderno y usado en sistemas UEFI).
+
+2. Particiones
+Sistema 1:
+
+    /dev/sda1: 487M, sistema Linux, arranque habilitado (Boot).
+    /dev/sda2: Partición extendida que contiene /dev/sda5.
+    /dev/sda5: 5.5G, tipo Linux LVM.
+        LVM (Logical Volume Manager): Dentro del LVM hay volúmenes lógicos, como deblvm--vg-home de 2.41 GiB.
+
+Sistema 2:
+
+    /dev/vda1: 499M, partición de recuperación de Windows.
+    /dev/vda2: 100M, partición de sistema EFI (para UEFI).
+    /dev/vda3: 113,6G, datos básicos de Microsoft (probablemente NTFS).
+    /dev/vda4: 561M, otra partición de recuperación de Windows.
+    /dev/vda5: 107,7G, sistema de ficheros de Linux.
+    /dev/vda6: 977M, partición de intercambio (Linux swap).
+
+3. Sistema operativo y configuración del disco
+
+    Sistema 1:
+        Diseñado para un entorno Linux puro.
+        Uso de LVM para gestionar particiones, lo que permite flexibilidad en la asignación de espacio.
+        Es un entorno virtual (QEMU), probablemente para pruebas o configuraciones de laboratorio.
+
+    Sistema 2:
+        Configuración dual o mixta con Windows y Linux:
+            Particiones para Windows (vda1, vda3, vda4).
+            Particiones para Linux (vda5, vda6).
+        Uso del esquema GPT para soportar particiones UEFI.
+
+4. Tecnología de almacenamiento
+
+    Sistema 1:
+        Basado en un disco virtual con almacenamiento limitado (6 GiB).
+        Menor capacidad y rendimiento comparado con hardware físico.
+
+    Sistema 2:
+        Basado en un SSD físico de alta capacidad (223,57 GiB), marca Kingston.
+        Mayor velocidad y capacidad para aplicaciones prácticas.
+
+5. Entorno gráfico
+
+    Sistema 1: Configuración minimalista, posiblemente para servidores, entornos de prueba o aprendizaje (uso de LVM en un disco virtual pequeño).
+    Sistema 2: Sistema configurado para usuarios finales con doble sistema operativo (Windows y Linux), preparado para productividad y uso general.

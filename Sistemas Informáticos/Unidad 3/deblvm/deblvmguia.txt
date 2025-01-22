@@ -1,0 +1,62 @@
+CREACIÓN DE LA MÁQUINA VIRTUAL:
+virt-install --name deblvm --memory 1024 --disk size=6 --disk size=4 --graphics none --location /srv/SIINF/debian-12.7.0-amd64-netinst.iso --extra-args "console=ttyS0 theme=dark"
+ 
+Nombre de la máquina --> deblvm
+Nombre de usuario y contraseña --> jimpinpa
+
+Particionado:
+
+Metodo de particionado --> Guided - use entire disk and set up LVM
+
+Seleccionar la partición -->  Virtual disk 1 (vda) - 6.4 GB Virtio Block Device
+
+Partitioning scheme --> Separate /home partition
+
+Instalacion de grub:
+
+/dev/vda
+
+UNA VEZ INSTALADO EL SISTEMA:
+
+Crear un PV en el segundo disco -->  sudo pvcreate /dev/vdb
+
+Añadir el pv al único VG --> sudo vgextend deblvm-vg /dev/vdb
+
+Extender 3G y redimensionar:
+
+sudo lvextend -L +3G /dev/deblvm-vg/root
+
+sudo resize2fs /dev/deblvm-vg/root
+
+Comando para comprobar --> sudo lvs
+
+Añadir 2G al segundo disco --> qemu-img resize /home/alumno/.local/share/libvirt/images/deblvm-1.qcow2 +2G
+
+Comando para comprobar que se ha añadido -- fdisk -l /dev/vdb
+
+Redimensionar el PV --> sudo pvresize /dev/vdb
+
+Comprobar el VG para comprobar constancia --> sudo vgs
+
+Añadir 2G al disco principal --> Igual que arriba pero sin el -1
+
+Crear particion física:
+
+Escribir comando sudo fdisk /dev/vda y dentro de el pulsar primero "n","p","3" dos veces "enter" por último pulsar "w"
+Luego de eso verificar que la nueva particion esta presente con el comando " sudo fdisk -l /dev/vda"
+Crear una particion fisica para LVM --> "sudo pvcreate /dev/vda3"
+
+Añadir el PV al VG --> "sudo vgextend deblvm-vg /dev/vda3
+
+Verificar el crecimiento -->  sudo vgs
+
+Mirar el LV asociado a /home
+
+Ampliar el LV con todo el espacio disponible --> sudo lvextend -l +100%FREE /dev/deblvm-vg1/home
+
+Redimensionar sistema de archivos --> sudo resize2fs /dev/deblvm-vg/home
+
+
+
+
+
