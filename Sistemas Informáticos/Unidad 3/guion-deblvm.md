@@ -34,38 +34,7 @@ virt-install --name deblvm \
 
 Usaremos el particionado guiado y separaremos la partición `/home`. Le daremos todo el espacio posible al Grupo de Volumen (VG) que crea el instalador e instalaremos GRUB en el MBR del primer disco duro.
 
-> [!NOTE]
-> - Realizar una instalación usando LVM en la que expliques qué está ocurriendo en cada una
->    de las pantallas correspondientes a la fase del particionado.
->
-> - Analizar las particiones físicas creadas de los VG así como los LV, indicando claramente
->   que tamaño tienen y para qué se usan en cada caso.
->
-> - El instalador crea una partición que monta en `/boot`. ¿Para que sirve esa partición?
-> 
-> - ¿Existe algún motivo por el que lo haga de esa manera?
-> 
-> - Explica las diferencias que observas entre el particionado que ha hecho
-> el instalador en la máquina virtual y el que hay en alguna de las máquinas 
-> físicas del aula. como por ejemplo la mostrada a continuación
 
-
-      jcromero@daw1-1xx:~$ sudo fdisk -l
-      Disco /dev/vda: 223,57 GiB, 240057409536 bytes, 468862128 sectores
-      Modelo de disco: KINGSTON SA400S3
-      Unidades: sectores de 1 \* 512 = 512 bytes
-      Tamaño de sector (lógico/físico): 512 bytes / 512 bytes
-      Tamaño de E/S (mínimo/óptimo): 512 bytes / 512 bytes
-      Tipo de etiqueta de disco: gpt
-      Identificador del disco: F7D56B56-3C5A-447B-8671-8CD63E21B58B
-
-      Disposit. Comienzo Final Sectores Tamaño Tipo
-      /dev/vda1 264192 1286143 1021952 499M Entorno de recuperación de Windows
-      /dev/vda2 1286144 1490943 204800 100M Sistema EFI
-      /dev/vda3 1490944 239744897 238253954 113,6G Datos básicos de Microsoft
-      /dev/vda4 239745024 240893951 1148928 561M Entorno de recuperación de Windows
-      /dev/vda5 240896000 466860031 225964032 107,7G Sistema de ficheros de Linux
-      /dev/vda6 466860032 468860927 2000896 977M Linux swap
 
 ## Una vez hallamos realizado la instalación.
 
@@ -108,3 +77,49 @@ Usaremos el particionado guiado y separaremos la partición `/home`. Le daremos 
 >
 > Para añadir todo el espacio que queda en el VG a uno de sus LVs puedes
 > usar el comando `lvextend -l +100%FREE /dev/deblvm-vg/home`.
+
+
+## Preguntas a Responder
+
+ - Realizar una instalación usando LVM en la que expliques qué está ocurriendo en cada una
+    de las pantallas correspondientes a la fase del particionado.
+
+ - Analizar las particiones físicas creadas de los VG así como los LV, indicando claramente
+   que tamaño tienen y para qué se usan en cada caso.
+
+ - El instalador crea una partición que monta en `/boot`. ¿Para que sirve esa partición?
+   Esa partición sirve para iniciar el sistema ya que contiene el GRUB y los archivos necesarios
+   para iniciar el sistema con lo cuál es necesario que esté fuera del LVM
+ 
+ - ¿Existe algún motivo por el que lo haga de esa manera?
+  1. Acceso directo del cargador de arranque: aunque los GRUB modernos pueden trabajar con LVM,
+     antigüamente había limitaciones. Esta configuración asegura la compatibilidad con sistemas más antigüos
+     o problemáticos.
+  2. Facilidad de recuperación: Si el LVM falla, los archivos de arranque (kernel, initramfs, configuración de GRUB)       permanecen accesibles en una partición estándar, facilitando la reparación del sistema.
+  3. Aislamiento y estabilidad: Mantener los archivos de arranque separados reduce riesgos de corrupción por problemas en los volúmenes lógicos y asegura un entorno de arranque confiable.
+  4. Tamaño fijo y simplicidad: `/boot` no necesita redimensionarse frecuentemente, lo que la hace ideal como una partición estática independiente.
+
+     Esta configuración garantiza un arranque robusto, compatible y fácilmente recuperable, incluso en sistemas complejos como los que usan LVM.
+
+ 
+ - Explica las diferencias que observas entre el particionado que ha hecho
+ el instalador en la máquina virtual y el que hay en alguna de las máquinas 
+ físicas del aula. como por ejemplo la mostrada a continuación
+
+
+      jcromero@daw1-1xx:~$ sudo fdisk -l
+      Disco /dev/vda: 223,57 GiB, 240057409536 bytes, 468862128 sectores
+      Modelo de disco: KINGSTON SA400S3
+      Unidades: sectores de 1 \* 512 = 512 bytes
+      Tamaño de sector (lógico/físico): 512 bytes / 512 bytes
+      Tamaño de E/S (mínimo/óptimo): 512 bytes / 512 bytes
+      Tipo de etiqueta de disco: gpt
+      Identificador del disco: F7D56B56-3C5A-447B-8671-8CD63E21B58B
+
+      Disposit. Comienzo Final Sectores Tamaño Tipo
+      /dev/vda1 264192 1286143 1021952 499M Entorno de recuperación de Windows
+      /dev/vda2 1286144 1490943 204800 100M Sistema EFI
+      /dev/vda3 1490944 239744897 238253954 113,6G Datos básicos de Microsoft
+      /dev/vda4 239745024 240893951 1148928 561M Entorno de recuperación de Windows
+      /dev/vda5 240896000 466860031 225964032 107,7G Sistema de ficheros de Linux
+      /dev/vda6 466860032 468860927 2000896 977M Linux swap
